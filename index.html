@@ -9,6 +9,167 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <!-- Mobile Responsive Styles -->
+    <style>
+        /* Mobile-first responsive design */
+        @media (max-width: 768px) {
+            /* Tables: Enable horizontal scroll on mobile */
+            table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                font-size: 0.85em !important;
+            }
+
+            table th, table td {
+                padding: 12px !important;
+                min-width: 120px;
+            }
+
+            /* Author section: Stack vertically on mobile */
+            .author-section-flex {
+                flex-direction: column !important;
+                text-align: center !important;
+            }
+
+            .author-section-flex > div {
+                width: 100% !important;
+            }
+
+            /* Buttons: Full width on mobile */
+            .cta-button, .cta-buttons a {
+                display: block !important;
+                width: 100% !important;
+                margin: 10px 0 !important;
+                text-align: center !important;
+            }
+
+            /* GitHub button and similar CTAs */
+            div[style*="text-align: center"] a {
+                display: block !important;
+                width: calc(100% - 40px) !important;
+                margin: 10px 20px !important;
+            }
+
+            /* Feature grids: Single column on mobile */
+            .feature-grid, .benefits-grid, .security-grid {
+                grid-template-columns: 1fr !important;
+                gap: 20px !important;
+            }
+
+            /* Typography: Smaller on mobile */
+            h1 {
+                font-size: 2em !important;
+            }
+
+            h2 {
+                font-size: 1.75em !important;
+            }
+
+            h3 {
+                font-size: 1.4em !important;
+            }
+
+            h4 {
+                font-size: 1.2em !important;
+            }
+
+            /* Padding: Reduce on mobile */
+            .content-section {
+                padding: 30px 20px !important;
+            }
+
+            .article-content {
+                padding: 20px !important;
+            }
+
+            /* Code blocks: Smaller font */
+            pre code {
+                font-size: 0.75em !important;
+            }
+
+            /* Comparison boxes: Stack vertically */
+            .comparison-box {
+                flex-direction: column !important;
+            }
+
+            .comparison-item {
+                width: 100% !important;
+                margin: 10px 0 !important;
+            }
+
+            /* Author profile: Stack vertically */
+            div[style*="display: flex"][style*="gap: 30px"] {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            /* Workflow diagrams: Scroll horizontally */
+            .workflow-diagram {
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch !important;
+            }
+
+            /* Stats showcase: Single column */
+            .stats-showcase {
+                flex-direction: column !important;
+            }
+
+            .stat-item {
+                width: 100% !important;
+                margin: 10px 0 !important;
+            }
+        }
+
+        /* Tablet optimization (769px - 1024px) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            table th, table td {
+                padding: 15px !important;
+                font-size: 0.95em !important;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            h1 {
+                font-size: 2.5em !important;
+            }
+
+            h2 {
+                font-size: 2em !important;
+            }
+        }
+
+        /* Ensure touch targets are at least 44x44px (Apple HIG) */
+        @media (max-width: 768px) {
+            button, a, input, select, textarea {
+                min-height: 44px;
+                min-width: 44px;
+            }
+
+            /* Table cell touch targets */
+            table td, table th {
+                min-height: 44px;
+            }
+        }
+
+        /* Print styles: Hide navigation and optimize for printing */
+        @media print {
+            .blog-nav, .table-of-contents, .cta-section, .blog-footer {
+                display: none !important;
+            }
+
+            .article-content {
+                max-width: 100% !important;
+            }
+
+            table {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Blog Header -->
@@ -18,7 +179,7 @@
                 <a href="index.html" class="logo">☕ Brewing Intelligence</a>
                 <div class="nav-links">
                     <a href="#introduction">Read Article</a>
-                    <a href="index.html">Interactive Version</a>
+                    <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank">⭐ View on GitHub</a>
                 </div>
             </div>
         </nav>
@@ -41,17 +202,12 @@
                 <div class="author-info">
                     <div class="author-avatar"></div>
                     <div class="author-details">
-                        <div class="author-name">AI Systems Research</div>
                         <div class="author-stats">
                             <span>25 min read</span>
                             <span class="meta-dot">•</span>
-                            <span>Jan 13, 2025</span>
+                            <span>October 26, 2025</span>
                         </div>
                     </div>
-                </div>
-                <div class="article-actions">
-                    <button class="action-btn">🔖 Save</button>
-                    <button class="action-btn">📤 Share</button>
                 </div>
             </div>
         </div>
@@ -260,64 +416,100 @@
 
                 <p class="intro-text">With great autonomy comes significant challenges. Let's explore the major pitfalls:</p>
 
-                <div class="challenge-grid">
-                    <div class="challenge-item">
-                        <div class="challenge-header">
-                            <span class="challenge-icon"></span>
-                            <h3>Tool Hallucination</h3>
-                        </div>
-                        <p>Agents might invent non-existent tools or misuse real ones.</p>
-                        <div class="code-example">
-                            <pre><code class="language-json">{
-  "tool": "orderQuantumChai",
-  "args": {"dimensions": 11}
-}</code></pre>
-                        </div>
-                        <div class="impact-label danger">Impact: System crashes, failed transactions</div>
-                    </div>
-
-                    <div class="challenge-item">
-                        <div class="challenge-header">
-                            <span class="challenge-icon"></span>
-                            <h3>State & Memory Drift</h3>
-                        </div>
-                        <p>Context loss over long conversations or sessions.</p>
-                        <ul class="timeline-list">
-                            <li>Day 1: "I like extra ginger"</li>
-                            <li>Day 5: "Do you like ginger?"</li>
-                            <li>Day 10: Orders without sugar</li>
-                        </ul>
-                        <div class="impact-label warning">Impact: Degraded UX, lost personalization</div>
-                    </div>
-
-                    <div class="challenge-item">
-                        <div class="challenge-header">
-                            <span class="challenge-icon"></span>
-                            <h3>Security Risks</h3>
-                        </div>
-                        <p>Access to sensitive systems creates vulnerabilities.</p>
-                        <ul class="risk-list">
-                            <li>Data leakage</li>
-                            <li>Unauthorized transactions</li>
-                            <li>Credential exposure</li>
-                            <li>Prompt injection attacks</li>
-                        </ul>
-                        <div class="impact-label danger">Impact: Financial loss, compliance violations</div>
-                    </div>
-
-                    <div class="challenge-item">
-                        <div class="challenge-header">
-                            <span class="challenge-icon">⏱️</span>
-                            <h3>Latency & Costs</h3>
-                        </div>
-                        <p>Every tool call adds overhead.</p>
-                        <div class="calculation-box">
-                            <div>200ms × 20 calls = <strong>4 seconds</strong></div>
-                            <div>$0.01 × 20 calls = <strong>$0.20</strong></div>
-                        </div>
-                        <div class="impact-label warning">Impact: Poor UX, unsustainable costs</div>
-                    </div>
+                <div style="overflow-x: auto; margin: 30px 0;">
+                    <table style="width: 100%; border-collapse: collapse; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                <th style="padding: 20px; text-align: left; font-weight: 600; font-size: 1.1em;">Challenge</th>
+                                <th style="padding: 20px; text-align: left; font-weight: 600; font-size: 1.1em;">Description</th>
+                                <th style="padding: 20px; text-align: left; font-weight: 600; font-size: 1.1em;">Example</th>
+                                <th style="padding: 20px; text-align: left; font-weight: 600; font-size: 1.1em;">Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #f8f9fa; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#e9ecef'" onmouseout="this.style.backgroundColor='#f8f9fa'">
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; font-weight: 600; color: #495057;">
+                                    ⚠️ Tool Hallucination
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; color: #6c757d;">
+                                    Agents might invent non-existent tools or misuse real ones
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <code style="background: #f1f3f5; padding: 5px 10px; border-radius: 4px; font-size: 0.9em; display: block;">{"tool": "orderQuantumChai", "args": {"dimensions": 11}}</code>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <span style="background: #fee; color: #c41e3a; padding: 6px 12px; border-radius: 6px; font-weight: 500; font-size: 0.9em; display: inline-block;">🚨 System crashes, failed transactions</span>
+                                </td>
+                            </tr>
+                            <tr style="background-color: white; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#f8f9fa'" onmouseout="this.style.backgroundColor='white'">
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; font-weight: 600; color: #495057;">
+                                    🧠 State & Memory Drift
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; color: #6c757d;">
+                                    Context loss over long conversations or sessions
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <div style="font-size: 0.9em; line-height: 1.6;">
+                                        • Day 1: "I like extra ginger"<br>
+                                        • Day 5: "Do you like ginger?"<br>
+                                        • Day 10: Orders without sugar
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <span style="background: #fff3cd; color: #856404; padding: 6px 12px; border-radius: 6px; font-weight: 500; font-size: 0.9em; display: inline-block;">⚠️ Degraded UX, lost personalization</span>
+                                </td>
+                            </tr>
+                            <tr style="background-color: #f8f9fa; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#e9ecef'" onmouseout="this.style.backgroundColor='#f8f9fa'">
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; font-weight: 600; color: #495057;">
+                                    🔒 Security Risks
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; color: #6c757d;">
+                                    Access to sensitive systems creates vulnerabilities
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <div style="font-size: 0.9em; line-height: 1.6;">
+                                        • Data leakage<br>
+                                        • Unauthorized transactions<br>
+                                        • Credential exposure<br>
+                                        • Prompt injection attacks
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <span style="background: #fee; color: #c41e3a; padding: 6px 12px; border-radius: 6px; font-weight: 500; font-size: 0.9em; display: inline-block;">🚨 Financial loss, compliance violations</span>
+                                </td>
+                            </tr>
+                            <tr style="background-color: white; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#f8f9fa'" onmouseout="this.style.backgroundColor='white'">
+                                <td style="padding: 20px; font-weight: 600; color: #495057;">
+                                    ⏱️ Latency & Costs
+                                </td>
+                                <td style="padding: 20px; color: #6c757d;">
+                                    Every tool call adds overhead
+                                </td>
+                                <td style="padding: 20px;">
+                                    <div style="font-size: 0.9em; line-height: 1.8;">
+                                        <strong>200ms × 20 calls = 4 seconds</strong><br>
+                                        <strong>$0.01 × 20 calls = $0.20</strong>
+                                    </div>
+                                </td>
+                                <td style="padding: 20px;">
+                                    <span style="background: #fff3cd; color: #856404; padding: 6px 12px; border-radius: 6px; font-weight: 500; font-size: 0.9em; display: inline-block;">⚠️ Poor UX, unsustainable costs</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+
+                <!-- Mobile-friendly version (visible on small screens) -->
+                <style>
+                    @media (max-width: 768px) {
+                        .challenges-table-desktop { display: none; }
+                        .challenges-table-mobile { display: block; }
+                    }
+                    @media (min-width: 769px) {
+                        .challenges-table-desktop { display: block; }
+                        .challenges-table-mobile { display: none; }
+                    }
+                </style>
 
                 <blockquote class="highlight-quote">
                     You need an architecture to <strong>standardize, validate, and safely coordinate</strong> these tool interactions. You need a protocol that agents and tools can both understand.
@@ -399,7 +591,7 @@
 
                 <div class="architecture-cards">
                     <div class="arch-card client-card">
-                        <h4>🤖 MCP Client (Agent)</h4>
+                        <h4>🧠 MCP Client (Agent)</h4>
                         <p>Your AI agent—the chai-loving decision-maker. The client:</p>
                         <ul>
                             <li>Discovers available tools from servers</li>
@@ -504,50 +696,108 @@
 
                 <p>Let's revisit those challenges and see how MCP addresses them:</p>
 
-                <div class="solution-grid">
-                    <div class="solution-card">
-                        <div class="problem-tag">❌ Tool Hallucination</div>
-                        <div class="solution-arrow">→</div>
-                        <div class="solution-tag">✅ Discovery API</div>
-                        <div class="solution-details">
-                            <p><strong>Before:</strong> Agent invents "orderQuantumChai()"</p>
-                            <p><strong>With MCP:</strong> Agent queries /discover, sees only valid tools</p>
-                            <div class="impact-positive">Eliminates hallucination entirely</div>
-                        </div>
-                    </div>
-
-                    <div class="solution-card">
-                        <div class="problem-tag">❌ State Drift</div>
-                        <div class="solution-arrow">→</div>
-                        <div class="solution-tag">✅ Resource Access</div>
-                        <div class="solution-details">
-                            <p><strong>Before:</strong> Agent forgets user preferences</p>
-                            <p><strong>With MCP:</strong> GET /resources/userPreferences</p>
-                            <div class="impact-positive">Persistent, centralized state</div>
-                        </div>
-                    </div>
-
-                    <div class="solution-card">
-                        <div class="problem-tag">❌ Security Risks</div>
-                        <div class="solution-arrow">→</div>
-                        <div class="solution-tag">✅ Auth Layer</div>
-                        <div class="solution-details">
-                            <p><strong>Before:</strong> Agent has direct API keys</p>
-                            <p><strong>With MCP:</strong> Centralized auth, permissions, audit logs</p>
-                            <div class="impact-positive">Principle of least privilege</div>
-                        </div>
-                    </div>
-
-                    <div class="solution-card">
-                        <div class="problem-tag">❌ Complex Orchestration</div>
-                        <div class="solution-arrow">→</div>
-                        <div class="solution-tag">✅ Server Composition</div>
-                        <div class="solution-details">
-                            <p><strong>Before:</strong> Agent chains multiple calls</p>
-                            <p><strong>With MCP:</strong> Server exposes composite tools</p>
-                            <div class="impact-positive">Reduced agent complexity</div>
-                        </div>
-                    </div>
+                <div style="overflow-x: auto; margin: 30px 0;">
+                    <table style="width: 100%; border-collapse: collapse; box-shadow: 0 2px 8px rgba(0,0,0,0.1); border-radius: 10px; overflow: hidden;">
+                        <thead>
+                            <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                <th style="padding: 20px; text-align: left; font-weight: 600; font-size: 1.1em;">Challenge</th>
+                                <th style="padding: 20px; text-align: left; font-weight: 600; font-size: 1.1em;">❌ Before MCP</th>
+                                <th style="padding: 20px; text-align: center; font-weight: 600; font-size: 1.3em;">→</th>
+                                <th style="padding: 20px; text-align: left; font-weight: 600; font-size: 1.1em;">✅ With MCP</th>
+                                <th style="padding: 20px; text-align: left; font-weight: 600; font-size: 1.1em;">Impact</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #f8f9fa; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#e9ecef'" onmouseout="this.style.backgroundColor='#f8f9fa'">
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; font-weight: 600; color: #495057;">
+                                    Tool Hallucination
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; background: #fee; color: #c41e3a;">
+                                    <div style="padding: 10px;">
+                                        Agent invents non-existent tools like <code style="background: white; padding: 2px 6px; border-radius: 3px;">"orderQuantumChai()"</code>
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; text-align: center; font-size: 1.5em; color: #667eea;">
+                                    →
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; background: #d4edda; color: #155724;">
+                                    <div style="padding: 10px;">
+                                        <strong>Discovery API</strong><br>
+                                        Agent queries <code style="background: white; padding: 2px 6px; border-radius: 3px;">/discover</code>, sees only valid tools
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <span style="background: #d4edda; color: #155724; padding: 8px 14px; border-radius: 6px; font-weight: 500; font-size: 0.9em; display: inline-block;">✅ Eliminates hallucination entirely</span>
+                                </td>
+                            </tr>
+                            <tr style="background-color: white; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#f8f9fa'" onmouseout="this.style.backgroundColor='white'">
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; font-weight: 600; color: #495057;">
+                                    State & Memory Drift
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; background: #fee; color: #c41e3a;">
+                                    <div style="padding: 10px;">
+                                        Agent forgets user preferences across sessions
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; text-align: center; font-size: 1.5em; color: #667eea;">
+                                    →
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; background: #d4edda; color: #155724;">
+                                    <div style="padding: 10px;">
+                                        <strong>Resource Access</strong><br>
+                                        <code style="background: white; padding: 2px 6px; border-radius: 3px;">GET /resources/userPreferences</code>
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <span style="background: #d4edda; color: #155724; padding: 8px 14px; border-radius: 6px; font-weight: 500; font-size: 0.9em; display: inline-block;">✅ Persistent, centralized state</span>
+                                </td>
+                            </tr>
+                            <tr style="background-color: #f8f9fa; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#e9ecef'" onmouseout="this.style.backgroundColor='#f8f9fa'">
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; font-weight: 600; color: #495057;">
+                                    Security Risks
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; background: #fee; color: #c41e3a;">
+                                    <div style="padding: 10px;">
+                                        Agent has direct access to API keys and credentials
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; text-align: center; font-size: 1.5em; color: #667eea;">
+                                    →
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6; background: #d4edda; color: #155724;">
+                                    <div style="padding: 10px;">
+                                        <strong>Auth Layer</strong><br>
+                                        Centralized auth, permissions, audit logs
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; border-bottom: 1px solid #dee2e6;">
+                                    <span style="background: #d4edda; color: #155724; padding: 8px 14px; border-radius: 6px; font-weight: 500; font-size: 0.9em; display: inline-block;">✅ Principle of least privilege</span>
+                                </td>
+                            </tr>
+                            <tr style="background-color: white; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#f8f9fa'" onmouseout="this.style.backgroundColor='white'">
+                                <td style="padding: 20px; font-weight: 600; color: #495057;">
+                                    Complex Orchestration
+                                </td>
+                                <td style="padding: 20px; background: #fee; color: #c41e3a;">
+                                    <div style="padding: 10px;">
+                                        Agent must chain multiple API calls manually
+                                    </div>
+                                </td>
+                                <td style="padding: 20px; text-align: center; font-size: 1.5em; color: #667eea;">
+                                    →
+                                </td>
+                                <td style="padding: 20px; background: #d4edda; color: #155724;">
+                                    <div style="padding: 10px;">
+                                        <strong>Server Composition</strong><br>
+                                        Server exposes composite, high-level tools
+                                    </div>
+                                </td>
+                                <td style="padding: 20px;">
+                                    <span style="background: #d4edda; color: #155724; padding: 8px 14px; border-radius: 6px; font-weight: 500; font-size: 0.9em; display: inline-block;">✅ Reduced agent complexity</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
 
                 <blockquote class="insight-quote">
@@ -566,6 +816,13 @@
                 <blockquote class="pullquote">
                     "Talk is cheap. Show me the code." — Linus Torvalds (probably after his morning coffee)
                 </blockquote>
+
+                <div style="text-align: center; margin: 40px 0;">
+                    <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank" style="display: inline-block; padding: 18px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 1.15em; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s ease; border: none; cursor: pointer;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)'">
+                        ⭐ View Full Code on GitHub
+                    </a>
+                    <p style="margin-top: 15px; color: #6c757d; font-size: 0.95em;">Complete Weather, News, and Finance MCP servers with FastMCP</p>
+                </div>
 
                 <h3>The Game Plan</h3>
 
@@ -591,7 +848,7 @@
                     </div>
 
                     <div class="feature-card">
-                        <div class="feature-icon">🤖</div>
+                        <div class="feature-icon">⚡</div>
                         <h4>Smart Client</h4>
                         <p>LLM-powered orchestration</p>
                     </div>
@@ -981,11 +1238,11 @@ Total: 3/3 tests passed
                     <h3 style="color: white; margin-bottom: 20px;">Want the Complete Implementation Guide?</h3>
                     <p style="color: white; margin-bottom: 30px; font-size: 1.1em;">Get the full source code, detailed walkthroughs, LangSmith monitoring setup, deployment guides, and real-world extension examples. Everything you need to go from zero to production.</p>
                     <div class="cta-buttons">
-                        <a href="../fastmcp-implementation/index.html" class="cta-button" style="display: inline-block; padding: 15px 40px; background: white; color: #2563eb; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 1.1em; margin: 10px;">
+                        <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol/blob/main/MCP_Guide.html" target="_blank" class="cta-button" style="display: inline-block; padding: 15px 40px; background: white; color: #2563eb; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 1.1em; margin: 10px;">
                             📖 Complete Step-by-Step Guide
                         </a>
-                        <a href="../fastmcp-implementation/COMPLETE_GUIDE.md" class="cta-button" style="display: inline-block; padding: 15px 40px; background: rgba(255,255,255,0.2); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 1.1em; margin: 10px;">
-                            📄 Full Documentation (MD)
+                        <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank" class="cta-button" style="display: inline-block; padding: 15px 40px; background: rgba(255,255,255,0.2); color: white; text-decoration: none; border-radius: 10px; font-weight: 600; font-size: 1.1em; margin: 10px;">
+                            📄 View Full Repository
                         </a>
                     </div>
                 </div>
@@ -997,9 +1254,65 @@ Total: 3/3 tests passed
             <section id="deployment" class="content-section">
                 <h2>Production Deployment</h2>
 
-                <p>Now let's take your Chai MCP Server from localhost to production-grade cloud deployment.</p>
+                <p>So you've built your Weather, News, and Finance MCP servers. They work beautifully on your laptop. Now what?</p>
 
-                <h3>Deployment Options</h3>
+                <p>Here's the thing about MCP servers using <strong>stdio transport</strong>: they're different from your typical REST APIs. They don't listen on ports. They don't have HTTP endpoints. They communicate through standard input/output streams—like old-school Unix pipes, but with JSON-RPC superpowers.</p>
+
+                <h3>Understanding MCP Deployment Models</h3>
+
+                <div class="info-box">
+                    <h4>🔍 Two Deployment Patterns</h4>
+                    <p><strong>1. Local/Desktop Integration:</strong> MCP servers run as local processes spawned by desktop applications (Claude Desktop, Cursor, etc.). The client starts the server as a subprocess and communicates via stdio.</p>
+                    <ul>
+                        <li>Perfect for: Personal productivity tools, IDE integrations, local dev workflows</li>
+                        <li>Security: Process isolation, file system permissions</li>
+                        <li>Examples: Our Weather/News/Finance servers run this way!</li>
+                    </ul>
+
+                    <p><strong>2. HTTP Transport (Alternative):</strong> MCP servers can optionally expose HTTP endpoints for remote access, though this requires additional setup and security considerations.</p>
+                    <ul>
+                        <li>Perfect for: Centralized enterprise services, cloud-based agents</li>
+                        <li>Security: HTTPS, authentication, rate limiting required</li>
+                        <li>Examples: Shared company-wide MCP servers</li>
+                    </ul>
+                </div>
+
+                <h3>Deployment Option 1: Desktop/Local Applications</h3>
+
+                <p>The most common pattern—and what our implementation uses—is <strong>desktop integration</strong>:</p>
+
+                <pre><code class="language-json">// claude_desktop_config.json
+{
+  "mcpServers": {
+    "weather": {
+      "command": "uv",
+      "args": ["run", "python", "server/weather_server.py"],
+      "env": {
+        "OPENWEATHER_API_KEY": "your_key"
+      }
+    },
+    "news": {
+      "command": "uv",
+      "args": ["run", "python", "server/news_server.py"]
+    }
+  }
+}</code></pre>
+
+                <p>When Claude Desktop starts, it spawns these servers as child processes. When you ask "What's the weather in Tokyo?", Claude discovers the weather tools and calls them via stdio.</p>
+
+                <div class="tip-box">
+                    <strong>💡 Distribution Tips</strong>
+                    <ul>
+                        <li><strong>Package as PyPI module:</strong> Users can <code>pip install your-mcp-server</code></li>
+                        <li><strong>Create installers:</strong> PyInstaller/Nuitka for standalone executables</li>
+                        <li><strong>Docker images:</strong> For consistent environments</li>
+                        <li><strong>GitHub releases:</strong> With installation scripts</li>
+                    </ul>
+                </div>
+
+                <h3>Deployment Option 2: Cloud/HTTP Deployment</h3>
+
+                <p>For centralized enterprise use, you can wrap MCP servers with HTTP transport:</p>
 
                 <div class="deployment-table">
                     <table>
@@ -1013,20 +1326,20 @@ Total: 3/3 tests passed
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Render</strong></td>
-                                <td>Quick demos, MVPs</td>
-                                <td>5 minutes</td>
-                                <td>Auto-scale</td>
+                                <td><strong>Docker + VPS</strong></td>
+                                <td>Simple cloud hosting</td>
+                                <td>15 minutes</td>
+                                <td>Medium</td>
                             </tr>
                             <tr>
-                                <td><strong>AWS ECS</strong></td>
-                                <td>Enterprise B2B</td>
+                                <td><strong>AWS Lambda</strong></td>
+                                <td>Serverless, pay-per-use</td>
                                 <td>30 minutes</td>
-                                <td>High</td>
+                                <td>Very high</td>
                             </tr>
                             <tr>
                                 <td><strong>Google Cloud Run</strong></td>
-                                <td>Serverless scale</td>
+                                <td>Container-based serverless</td>
                                 <td>10 minutes</td>
                                 <td>Very high</td>
                             </tr>
@@ -1040,32 +1353,57 @@ Total: 3/3 tests passed
                     </table>
                 </div>
 
+                <h3>Quick Docker Setup</h3>
+
+                <pre><code class="language-dockerfile"># Dockerfile
+FROM python:3.13-slim
+
+WORKDIR /app
+
+# Install UV
+RUN pip install uv
+
+# Copy project files
+COPY . .
+
+# Install dependencies
+RUN uv sync
+
+# Run server
+CMD ["uv", "run", "python", "server/weather_server.py"]</code></pre>
+
+                <pre><code class="language-bash"># Build and run
+docker build -t mcp-weather-server .
+docker run -p 8000:8000 \
+  -e OPENWEATHER_API_KEY=your_key \
+  mcp-weather-server</code></pre>
+
                 <h3>Production Checklist</h3>
 
                 <div class="checklist-grid">
                     <label class="checklist-item">
                         <input type="checkbox" />
-                        <span>HTTPS/TLS enabled</span>
+                        <span>Environment variables secured</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox" />
-                        <span>Health check endpoint</span>
+                        <span>Error handling & logging</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox" />
-                        <span>Structured logging</span>
+                        <span>API rate limits configured</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox" />
-                        <span>API authentication</span>
+                        <span>Dependency pinning (uv.lock)</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox" />
-                        <span>Rate limiting</span>
+                        <span>Health checks & monitoring</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox" />
-                        <span>Error tracking</span>
+                        <span>Graceful shutdown handling</span>
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox" />
@@ -1073,8 +1411,20 @@ Total: 3/3 tests passed
                     </label>
                     <label class="checklist-item">
                         <input type="checkbox" />
-                        <span>Load testing</span>
+                        <span>LangSmith monitoring (optional)</span>
                     </label>
+                </div>
+
+                <div class="tip-box">
+                    <strong>💡 Pro Tip: Start Local, Scale Later</strong>
+                    <p>Most MCP servers start as local desktop integrations. Only move to cloud deployment when you need:</p>
+                    <ul>
+                        <li>Centralized control across teams</li>
+                        <li>Heavy computation that shouldn't run locally</li>
+                        <li>Access to private cloud resources</li>
+                        <li>Multi-user concurrent access</li>
+                    </ul>
+                    <p>Your Weather/News/Finance servers work perfectly as-is for local use!</p>
                 </div>
             </section>
 
@@ -1084,49 +1434,148 @@ Total: 3/3 tests passed
             <section id="security" class="content-section">
                 <h2>Security & Best Practices</h2>
 
-                <p>Building an MCP server is one thing—building a <strong>secure, trustworthy, production-grade</strong> MCP server is another.</p>
+                <p>Building an MCP server is easy. Building a <strong>secure, trustworthy, production-grade</strong> MCP server? That's where the real work begins. Let's talk about the things that keep security engineers up at night.</p>
+
+                <h3>Security Model: Stdio vs. HTTP</h3>
+
+                <div class="info-box">
+                    <h4>📍 Good News First</h4>
+                    <p>Our Weather/News/Finance servers use <strong>stdio transport</strong>, which has a built-in security advantage: <strong>process isolation</strong>. The MCP server runs as a child process of your application, inheriting the same permissions. There's no network exposure, no CORS headaches, no TLS certificates to manage.</p>
+                    <p><strong>Think of it like this:</strong> It's more secure to hand someone a sealed envelope (process communication) than to shout across a crowded room (network communication).</p>
+                </div>
 
                 <div class="security-grid">
                     <div class="security-card">
                         <div class="security-icon">🔐</div>
-                        <h4>Authentication</h4>
-                        <p>API keys or OAuth; never basic auth over HTTP</p>
-                    </div>
-
-                    <div class="security-card">
-                        <div class="security-icon">⚡</div>
-                        <h4>Rate Limiting</h4>
-                        <p>Per-tenant limits with burst allowance</p>
+                        <h4>API Key Management</h4>
+                        <p><strong>Never hardcode secrets.</strong> Use environment variables:</p>
+                        <pre style="font-size: 0.85em; margin-top: 10px;"><code>OPENWEATHER_API_KEY=xyz
+NEWS_API_KEY=abc
+# Add to .gitignore!</code></pre>
+                        <p style="margin-top: 10px;">For production: Use secret managers (AWS Secrets, Azure Key Vault, 1Password)</p>
                     </div>
 
                     <div class="security-card">
                         <div class="security-icon">✅</div>
                         <h4>Input Validation</h4>
-                        <p>Use Pydantic; validate all inputs</p>
+                        <p><strong>FastMCP auto-validates</strong> using your type hints! But add extra checks:</p>
+                        <pre style="font-size: 0.85em; margin-top: 10px;"><code>@mcp.tool()
+async def convert_currency(
+    amount: float
+) -> str:
+    if amount <= 0:
+        return "Error: Amount must be positive"
+    if amount > 1000000:
+        return "Error: Amount too large"</code></pre>
+                    </div>
+
+                    <div class="security-card">
+                        <div class="security-icon">⚡</div>
+                        <h4>Rate Limiting</h4>
+                        <p>External APIs have limits. Cache responses:</p>
+                        <pre style="font-size: 0.85em; margin-top: 10px;"><code>from functools import lru_cache
+
+@lru_cache(maxsize=100)
+async def get_weather_cached(
+    location: str
+):
+    # Cache for 5 minutes
+    ...</code></pre>
                     </div>
 
                     <div class="security-card">
                         <div class="security-icon">🔒</div>
-                        <h4>Secrets Management</h4>
-                        <p>Environment variables + secret managers</p>
+                        <h4>Error Handling</h4>
+                        <p><strong>Never leak sensitive info in errors:</strong></p>
+                        <pre style="font-size: 0.85em; margin-top: 10px;"><code>try:
+    data = await fetch_api(key)
+except Exception as e:
+    # ❌ Bad: return f"Error: {e}"
+    # ✅ Good: return "Unable to fetch data"
+    print(f"Internal error: {e}")  # Log it
+    return "Service temporarily unavailable"</code></pre>
                     </div>
 
                     <div class="security-card">
                         <div class="security-icon">📊</div>
                         <h4>Audit Logging</h4>
-                        <p>Structured JSON logs for all tool calls</p>
+                        <p>Log all tool invocations for debugging:</p>
+                        <pre style="font-size: 0.85em; margin-top: 10px;"><code>import logging
+
+@mcp.tool()
+async def get_weather(location: str):
+    logging.info(f"Weather request: {location}")
+    # ... implementation ...</code></pre>
                     </div>
 
                     <div class="security-card">
                         <div class="security-icon">🛡️</div>
-                        <h4>CORS Configuration</h4>
-                        <p>Whitelist specific origins only</p>
+                        <h4>Dependency Security</h4>
+                        <p>Keep dependencies updated:</p>
+                        <pre style="font-size: 0.85em; margin-top: 10px;"><code># Check for vulnerabilities
+uv pip check
+
+# Update dependencies
+uv sync --upgrade</code></pre>
                     </div>
                 </div>
 
-                <div class="warning-box">
-                    <strong>⚠️ Security Warning:</strong> MCP provides a protocol, not automatic security. Never expose dangerous operations without strict controls. Always implement authentication, authorization, and audit trails.
+                <h3>FastMCP-Specific Best Practices</h3>
+
+                <div class="info-box">
+                    <h4>🎯 What FastMCP Does For You</h4>
+                    <ul>
+                        <li><strong>Schema Validation:</strong> All inputs validated against type hints automatically</li>
+                        <li><strong>JSON-RPC Security:</strong> Handles protocol-level security (message integrity)</li>
+                        <li><strong>Error Boundaries:</strong> Exceptions caught and returned as error responses</li>
+                        <li><strong>Type Safety:</strong> Python 3.13 type hints prevent many bugs at dev time</li>
+                    </ul>
                 </div>
+
+                <div class="info-box">
+                    <h4>🚨 What You Must Handle</h4>
+                    <ul>
+                        <li><strong>External API Keys:</strong> Secure storage and rotation</li>
+                        <li><strong>Input Sanitization:</strong> Additional business logic validation</li>
+                        <li><strong>Rate Limiting:</strong> Respect external API limits</li>
+                        <li><strong>Error Messages:</strong> Don't leak sensitive information</li>
+                        <li><strong>Logging:</strong> Track usage patterns and errors</li>
+                        <li><strong>Dependency Updates:</strong> Monitor for security patches</li>
+                    </ul>
+                </div>
+
+                <h3>Real-World Security Checklist</h3>
+
+                <pre><code class="language-python"># .env file (in .gitignore!)
+✅ All API keys in environment variables
+✅ .env file never committed to git
+✅ Different keys for dev/staging/prod
+
+# Code Security
+✅ Input validation beyond type hints
+✅ Graceful error handling (no stack traces to users)
+✅ Reasonable timeouts (30s for HTTP requests)
+✅ Caching to prevent API quota exhaustion
+
+# Deployment
+✅ Dependency versions pinned (uv.lock committed)
+✅ Regular security updates (uv sync --upgrade)
+✅ Logging configured (but don't log secrets!)
+✅ Process monitoring (restart on crashes)
+
+# HTTP Deployment (if applicable)
+✅ HTTPS/TLS enabled
+✅ Authentication layer (API keys, OAuth)
+✅ CORS properly configured
+✅ Rate limiting implemented</code></pre>
+
+                <div class="warning-box">
+                    <strong>⚠️ Security Reality Check:</strong> MCP provides a <em>protocol</em>, not a security blanket. It standardizes communication, but security is <strong>your responsibility</strong>. The good news? With stdio transport and FastMCP's automatic validation, you start from a much safer baseline than rolling your own API. But never expose dangerous operations (file system access, code execution, database writes) without careful consideration.
+                </div>
+
+                <blockquote class="highlight-quote">
+                    <strong>Security Philosophy:</strong> "Make it easy to do the right thing, and hard to do the wrong thing." FastMCP makes the right thing (type-safe, validated tools) easy. But at the end of the day, <strong>you're the security guard</strong> deciding which operations your server should allow.
+                </blockquote>
             </section>
 
             <div class="section-divider"></div>
@@ -1135,33 +1584,96 @@ Total: 3/3 tests passed
             <section id="limitations" class="content-section">
                 <h2>Limitations and Real-World Considerations</h2>
 
-                <p>Even with MCP, building robust agentic systems remains challenging. Here are the honest limitations:</p>
+                <p>Time for some truth serum. FastMCP makes building MCP servers <em>easy</em>, but it doesn't magically solve all problems. Here are the honest limitations you'll face:</p>
 
                 <div class="limitation-list">
                     <div class="limitation-item">
-                        <h4>1. Security Is Only As Good As Your Implementation</h4>
-                        <p>MCP provides a protocol, not automatic security. You must implement proper controls, validation, and monitoring.</p>
+                        <h4>1. External API Dependencies</h4>
+                        <p>Our Weather, News, and Finance servers depend on third-party APIs. If OpenWeatherMap goes down, your weather tools stop working. If you hit NewsAPI's rate limit, headlines dry up.</p>
+                        <p><strong>Mitigation:</strong></p>
+                        <ul>
+                            <li>Implement caching (reduce API calls by 80%+)</li>
+                            <li>Add fallback mechanisms (multiple API providers)</li>
+                            <li>Graceful degradation (return cached data when API fails)</li>
+                            <li>Monitor API health and quotas</li>
+                        </ul>
                     </div>
 
                     <div class="limitation-item">
                         <h4>2. Latency & Cumulative Overhead</h4>
-                        <p>Each tool call adds 300-1000ms. For workflows with 10 calls: 3-10 seconds total. Mitigation: batching, streaming, edge deployment.</p>
+                        <p>Every tool call involves: LLM decision (500ms) → Tool invocation (200ms) → External API (300-1000ms) → LLM formatting (500ms). A simple "What's the weather and news in Tokyo?" could take 3-4 seconds.</p>
+                        <p><strong>Reality Check:</strong></p>
+                        <pre style="font-size: 0.9em; margin-top: 10px;"><code>User: "What's the weather in London and Tokyo?"
+└─ LLM: Decides to call get_current_weather twice (500ms)
+   ├─ Call 1: London (1200ms total)
+   └─ Call 2: Tokyo (1200ms total)
+└─ LLM: Formats response (500ms)
+Total: ~3.4 seconds</code></pre>
+                        <p><strong>Mitigation:</strong> Parallel tool calls (when supported), caching, streaming responses</p>
                     </div>
 
                     <div class="limitation-item">
-                        <h4>3. Single Point of Failure</h4>
-                        <p>If your MCP server goes down, the entire agent system breaks. Mitigation: high availability, circuit breakers, redundancy.</p>
+                        <h4>3. Cost Accumulation</h4>
+                        <p>LLM costs add up quickly. Each conversation involves multiple API calls:</p>
+                        <ul>
+                            <li>Initial LLM decision: ~1000 tokens ($0.001-0.01)</li>
+                            <li>Tool result processing: ~2000 tokens ($0.002-0.02)</li>
+                            <li>Final response: ~500 tokens ($0.0005-0.005)</li>
+                            <li><strong>Per conversation: $0.004-0.04</strong></li>
+                        </ul>
+                        <p>At 1000 conversations/day: $4-40/day or $120-1200/month just in LLM costs.</p>
+                        <p><strong>Mitigation:</strong> Use cheaper models (GPT-4o-mini, Claude Haiku), implement conversation limits, cache common queries</p>
                     </div>
 
                     <div class="limitation-item">
-                        <h4>4. Cost Accumulation</h4>
-                        <p>High-traffic scenarios can accumulate significant costs. Mitigation: caching, optimization, usage-based pricing.</p>
+                        <h4>4. Stdio Transport Limitations</h4>
+                        <p>Our implementation uses stdio, which is perfect for local use but has constraints:</p>
+                        <ul>
+                            <li><strong>One client per server:</strong> Can't share a weather server across multiple users simultaneously</li>
+                            <li><strong>Local only:</strong> Can't access servers remotely without HTTP wrapper</li>
+                            <li><strong>Process overhead:</strong> Each server is a separate Python process</li>
+                        </ul>
+                        <p><strong>When this matters:</strong> Multi-user enterprise scenarios (solution: switch to HTTP transport)</p>
                     </div>
 
                     <div class="limitation-item">
-                        <h4>5. Complexity Doesn't Disappear—It Shifts</h4>
-                        <p>You still need schema design, error handling, state management, security, and monitoring. MCP is an enabler, not a silver bullet.</p>
+                        <h4>5. LLM Tool Selection Isn't Perfect</h4>
+                        <p>Sometimes the LLM gets confused and calls the wrong tool, or forgets to call a tool at all.</p>
+                        <p><strong>Example failures we've seen:</strong></p>
+                        <ul>
+                            <li>"What's the weather?" → Calls <code>get_forecast</code> instead of <code>get_current_weather</code></li>
+                            <li>"Convert 100 USD to EUR" → Calls <code>get_exchange_rates</code> and does math wrong</li>
+                            <li>"Find news about AI" → Returns general news instead of calling <code>search_news</code></li>
+                        </ul>
+                        <p><strong>Mitigation:</strong> Better tool descriptions, few-shot examples in system prompts, tool-specific validation</p>
                     </div>
+
+                    <div class="limitation-item">
+                        <h4>6. Complexity Doesn't Disappear—It Shifts</h4>
+                        <p>FastMCP eliminates boilerplate, but you still need:</p>
+                        <ul>
+                            <li>Good error handling (network timeouts, API failures)</li>
+                            <li>Proper logging and monitoring</li>
+                            <li>Dependency management and updates</li>
+                            <li>API key rotation and security</li>
+                            <li>Rate limiting and caching strategies</li>
+                            <li>Testing (unit tests, integration tests, LLM behavior tests)</li>
+                        </ul>
+                        <p>FastMCP is a power tool, not a magic wand. You're trading "building infrastructure" for "building good tools."</p>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>💡 The Real Limitation: Your Imagination</h4>
+                    <p>The biggest limitation isn't technical—it's figuring out <strong>which tools actually provide value</strong>. We built Weather, News, and Finance servers because they're universally useful demos. But the real power comes when you build tools specific to <em>your</em> domain:</p>
+                    <ul>
+                        <li>Customer database queries</li>
+                        <li>Internal documentation search</li>
+                        <li>Code deployment triggers</li>
+                        <li>Slack/Teams integrations</li>
+                        <li>Data pipeline orchestration</li>
+                    </ul>
+                    <p>The protocol is solved. The infrastructure is handled. Now comes the creative part: <strong>What will you build?</strong></p>
                 </div>
             </section>
 
@@ -1169,47 +1681,160 @@ Total: 3/3 tests passed
 
             <!-- Conclusion -->
             <section id="conclusion" class="content-section">
-                <h2>Conclusion: Your Chai Awaits</h2>
+                <h2>Conclusion: From Zero to Agentic AI</h2>
 
-                <p class="lead-text">We started with a simple desire: ordering chai when it rains.</p>
+                <p class="lead-text">We started with a question: What if AI agents could access real-world data?</p>
 
-                <p>What seemed like a trivial task revealed profound shifts in how we build AI systems:</p>
+                <p>We ended with something tangible: <strong>three production MCP servers, one intelligent client, and ~860 lines of elegant code</strong> that would have taken thousands of lines just a year ago.</p>
+
+                <h3>The Journey We Took</h3>
 
                 <ol class="conclusion-list">
-                    <li><strong>From reactive to proactive:</strong> Agents that anticipate needs, not just respond to commands.</li>
-                    <li><strong>From monoliths to modularity:</strong> Tools as composable services, not baked-in features.</li>
-                    <li><strong>From chaos to protocol:</strong> Standardized interfaces that enable interoperability and safety.</li>
+                    <li><strong>Understanding the Problem:</strong> Traditional chatbots are stuck in their training data. The world moves too fast.</li>
+                    <li><strong>Discovering the Solution:</strong> MCP provides a standard protocol for tools. FastMCP makes building them trivial.</li>
+                    <li><strong>Building Real Tools:</strong> Weather forecasts, news headlines, currency exchange—not demos, but genuinely useful services.</li>
+                    <li><strong>Creating Intelligence:</strong> An LLM-powered client that autonomously selects and invokes the right tools.</li>
+                    <li><strong>Deploying Responsibly:</strong> Security, monitoring, error handling—the unglamorous but essential parts.</li>
                 </ol>
 
                 <div class="final-takeaway">
-                    <h3>What You've Learned</h3>
+                    <h3>What You've Gained</h3>
                     <ul>
-                        <li>Deep understanding of agentic AI fundamentals</li>
-                        <li>Practical knowledge of MCP architecture</li>
-                        <li>Complete MCP server implementation</li>
-                        <li>Production deployment strategies</li>
-                        <li>Security and governance best practices</li>
-                        <li>Real-world limitations and tradeoffs</li>
+                        <li><strong>Conceptual Understanding:</strong> The shift from reactive chatbots to proactive agents</li>
+                        <li><strong>Architectural Knowledge:</strong> How MCP solves tool hallucination and standardization</li>
+                        <li><strong>Practical Skills:</strong> Building production MCP servers with Python 3.13, FastMCP, and UV</li>
+                        <li><strong>Working Code:</strong> Weather, News, and Finance servers you can run right now</li>
+                        <li><strong>Deployment Strategies:</strong> From local desktop integration to cloud HTTP deployment</li>
+                        <li><strong>Security Awareness:</strong> What FastMCP handles vs what you must implement</li>
+                        <li><strong>Realistic Expectations:</strong> The honest limitations and how to mitigate them</li>
                     </ul>
                 </div>
 
+                <h3>The Bigger Picture</h3>
+
+                <p>MCP isn't just a protocol—it's a <strong>paradigm shift</strong>:</p>
+
+                <div class="comparison-box">
+                    <div class="comparison-item">
+                        <h4>Before MCP</h4>
+                        <ul>
+                            <li>Custom integrations for every LLM</li>
+                            <li>Hard-coded tools in model weights</li>
+                            <li>Tool hallucination problems</li>
+                            <li>Vendor lock-in</li>
+                            <li>Thousands of lines of boilerplate</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-item">
+                        <h4>With MCP + FastMCP</h4>
+                        <ul>
+                            <li>✨ Write once, works everywhere</li>
+                            <li>✨ Dynamic tool discovery</li>
+                            <li>✨ Zero hallucination (tools don't exist until discovered)</li>
+                            <li>✨ Vendor neutral</li>
+                            <li>✨ ~150 lines per server</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>🎯 The Real Achievement</h4>
+                    <p>You didn't just learn <em>how</em> to build MCP servers. You learned <em>why</em> they matter:</p>
+                    <ul>
+                        <li><strong>Modularity:</strong> Tools are independent services, not monolithic features</li>
+                        <li><strong>Composability:</strong> Mix and match servers to create custom agent capabilities</li>
+                        <li><strong>Maintainability:</strong> Update a weather server without touching the LLM</li>
+                        <li><strong>Testability:</strong> Each server can be tested independently</li>
+                        <li><strong>Scalability:</strong> Add new tools without retraining models</li>
+                    </ul>
+                    <p>This is how modern AI systems should be built.</p>
+                </div>
+
+                <h3>What's Next?</h3>
+
+                <p>Your Weather, News, and Finance servers are just the beginning. The real question is: <strong>What tools does <em>your</em> domain need?</strong></p>
+
+                <div class="feature-grid" style="margin-top: 30px;">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏢</div>
+                        <h4>Enterprise</h4>
+                        <p>Customer CRM queries, inventory management, approval workflows</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💻</div>
+                        <h4>DevOps</h4>
+                        <p>CI/CD triggers, log analysis, infrastructure monitoring</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h4>Analytics</h4>
+                        <p>Database queries, report generation, metric dashboards</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎓</div>
+                        <h4>Education</h4>
+                        <p>Course materials, student progress, assignment grading</p>
+                    </div>
+                </div>
+
                 <blockquote class="final-quote">
-                    <p><strong>The future of AI is agentic.</strong></p>
-                    <p><strong>The protocol is MCP.</strong></p>
-                    <p><strong>The possibilities are limitless.</strong></p>
+                    <p><strong>The infrastructure is solved.</strong></p>
+                    <p><strong>The protocol is standardized.</strong></p>
+                    <p><strong>The tools are simple to build.</strong></p>
+                    <p style="margin-top: 20px; font-size: 1.1em;">Now comes the creative part: <em>What will you enable?</em></p>
                 </blockquote>
 
-                <p class="closing-text">Build responsibly, build securely, and build systems that genuinely help people.</p>
+                <div class="success-box" style="margin-top: 40px;">
+                    <h4>🚀 You're Ready</h4>
+                    <p>You have everything you need:</p>
+                    <ul>
+                        <li>✅ Working Weather, News, and Finance servers</li>
+                        <li>✅ Intelligent client with dual LLM support (Anthropic + OpenAI)</li>
+                        <li>✅ Production-ready patterns and security practices</li>
+                        <li>✅ Deployment strategies for local and cloud</li>
+                        <li>✅ Complete source code and documentation</li>
+                    </ul>
+                    <p style="margin-top: 15px;">The only missing piece is <strong>you building something amazing</strong>.</p>
+                </div>
 
-                <div class="cta-section">
-                    <h3>Ready to Build?</h3>
-                    <div class="cta-buttons">
-                        <a href="https://modelcontextprotocol.io/" class="cta-button primary" target="_blank">
-                            📚 MCP Documentation
-                        </a>
-                        <a href="index.html" class="cta-button secondary">
-                            🎨 Interactive Version
-                        </a>
+                <p class="closing-text" style="margin-top: 30px;">Build responsibly. Build securely. Build systems that genuinely help people. And most importantly: <strong>build something you'd want to use yourself</strong>.</p>
+
+                <p class="closing-text">The agentic AI revolution isn't coming—it's here. You're now part of it. 🎉</p>
+
+                <!-- Author Section -->
+                <div style="margin-top: 60px; padding: 40px; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); border-radius: 15px; border-left: 5px solid #667eea;">
+                    <h3 style="margin-bottom: 10px; color: #2c3e50; font-size: 1.8em;">About the Author</h3>
+                    <div style="display: flex; align-items: center; gap: 30px; margin-top: 25px;">
+                        <div style="flex-shrink: 0;">
+                            <img src="Kumarjit Pathak Photo.jpg" alt="Kumarjit Pathak" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; box-shadow: 0 4px 15px rgba(0,0,0,0.2); border: 3px solid white;">
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-size: 1.8em; margin-bottom: 10px; color: #2c3e50;">Kumarjit Pathak</h4>
+                            <p style="font-size: 1.1em; color: #34495e; line-height: 1.6; margin-bottom: 20px;">
+                                Visionary AI Leader and passionate scientist exploring the intersection of artificial intelligence, agentic systems, and modern protocols.
+                                Creator of multiple award winning AI products and advocate for clean, maintainable AI system.
+                            </p>
+                            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                <a href="https://kumarjit-pathak.github.io/" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: white; color: #667eea; text-decoration: none; border-radius: 8px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
+                                    🌐 Visit Website
+                                </a>
+                                <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #333; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
+                                    ⭐ View on GitHub
+                                </a>
+                                <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol/blob/main/MCP_Guide.html" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: #667eea; color: white; text-decoration: none; border-radius: 8px; font-weight: 600; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
+                                    📖 Implementation Guide
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px; padding-top: 25px; border-top: 2px solid rgba(255,255,255,0.5);">
+                        <p style="font-style: italic; color: #5a6c7d; text-align: center; font-size: 1.05em;">
+                            "Building AI systems that are modular, secure, and genuinely useful—one MCP server at a time."
+                        </p>
                     </div>
                 </div>
             </section>
@@ -1237,10 +1862,33 @@ Total: 3/3 tests passed
                     </div>
 
                     <div class="ref-category">
-                        <h4>MCP Protocol</h4>
+                        <h4>MCP Protocol & Tools</h4>
                         <ul>
-                            <li>Anthropic (2024). <em>Introducing MCP</em>.</li>
-                            <li>Model Context Protocol Org. <em>Architecture Overview</em>.</li>
+                            <li>Anthropic (2024). <em>Introducing MCP</em>. <a href="https://modelcontextprotocol.io/" target="_blank">modelcontextprotocol.io</a></li>
+                            <li>Model Context Protocol. <em>Architecture Overview</em>. <a href="https://spec.modelcontextprotocol.io/" target="_blank">spec.modelcontextprotocol.io</a></li>
+                            <li>FastMCP. <em>The easiest way to build MCP servers</em>. <a href="https://github.com/jlowin/fastmcp" target="_blank">github.com/jlowin/fastmcp</a></li>
+                            <li>UV Package Manager. <em>An extremely fast Python package installer</em>. <a href="https://github.com/astral-sh/uv" target="_blank">github.com/astral-sh/uv</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="ref-category">
+                        <h4>APIs Used</h4>
+                        <ul>
+                            <li>OpenWeatherMap API. <em>Weather data service</em>. <a href="https://openweathermap.org/api" target="_blank">openweathermap.org/api</a></li>
+                            <li>NewsAPI. <em>News headlines and article search</em>. <a href="https://newsapi.org/" target="_blank">newsapi.org</a></li>
+                            <li>ExchangeRate-API. <em>Currency exchange rates</em>. <a href="https://www.exchangerate-api.com/" target="_blank">exchangerate-api.com</a></li>
+                            <li>Anthropic Claude API. <em>LLM for tool calling</em>. <a href="https://www.anthropic.com/api" target="_blank">anthropic.com/api</a></li>
+                            <li>OpenAI API. <em>Alternative LLM provider</em>. <a href="https://platform.openai.com/" target="_blank">platform.openai.com</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="ref-category">
+                        <h4>Implementation Resources</h4>
+                        <ul>
+                            <li><a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol/blob/main/MCP_Guide.html" target="_blank">Complete Implementation Guide</a> - Step-by-step walkthrough</li>
+                            <li><a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank">Full Repository</a> - Complete source code and examples</li>
+                            <li><a href="https://docs.python.org/3.13/" target="_blank">Python 3.13 Documentation</a> - Latest Python features</li>
+                            <li><a href="https://pydantic-docs.helpmanual.io/" target="_blank">Pydantic Documentation</a> - Data validation library</li>
                         </ul>
                     </div>
                 </div>
@@ -1251,16 +1899,17 @@ Total: 3/3 tests passed
     <!-- Author Bio -->
     <section class="author-bio">
         <div class="bio-container">
-            <div class="bio-avatar">🤖</div>
+            <div class="bio-avatar">👨‍💻</div>
             <div class="bio-content">
-                <h3>About the Author</h3>
-                <p>This guide was written for developers, architects, and AI practitioners building the next generation of intelligent systems. Whether you're creating a simple chai-ordering bot or a complex enterprise agent platform, may your implementations be secure, your latencies low, and your chai always perfectly spiced.</p>
+                <h3>About This Guide</h3>
+                <p>This guide was written for developers, architects, and AI practitioners building the next generation of intelligent systems. From our Weather, News, and Finance servers to your custom domain-specific tools, the future of AI is modular, composable, and accessible.</p>
+                <p style="margin-top: 15px; font-style: italic; opacity: 0.9;">May your implementations be secure, your latencies low, your servers reliable, and your agents genuinely helpful. Happy building! 🚀</p>
                 <div class="bio-links">
-                    <a href="#" class="bio-link">More Articles</a>
+                    <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol/blob/main/MCP_Guide.html" target="_blank" class="bio-link">Full Implementation</a>
                     <span class="dot">•</span>
-                    <a href="index.html" class="bio-link">Interactive Demo</a>
+                    <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank" class="bio-link">GitHub Repository</a>
                     <span class="dot">•</span>
-                    <a href="#" class="bio-link">Follow</a>
+                    <a href="https://kumarjit-pathak.github.io/" target="_blank" class="bio-link">Author Website</a>
                 </div>
             </div>
         </div>
@@ -1272,24 +1921,24 @@ Total: 3/3 tests passed
             <h2>Continue Learning</h2>
             <div class="related-grid">
                 <article class="related-card">
-                    <div class="related-tag">Tutorial</div>
-                    <h3>Building Production APIs with FastAPI</h3>
-                    <p>Learn advanced patterns for building robust, scalable APIs.</p>
-                    <a href="#" class="read-more">Read more →</a>
+                    <div class="related-tag">Implementation</div>
+                    <h3>Complete FastMCP Implementation Guide</h3>
+                    <p>Full walkthrough with Weather, News, and Finance servers. Includes LangSmith monitoring and deployment strategies.</p>
+                    <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol/blob/main/MCP_Guide.html" target="_blank" class="read-more">View guide →</a>
                 </article>
 
                 <article class="related-card">
                     <div class="related-tag">Deep Dive</div>
-                    <h3>Understanding LLM Function Calling</h3>
-                    <p>How language models decide which tools to use and when.</p>
-                    <a href="#" class="read-more">Read more →</a>
+                    <h3>MCP Protocol Specification</h3>
+                    <p>Understand the underlying protocol, JSON-RPC transport, and tool discovery mechanisms.</p>
+                    <a href="https://spec.modelcontextprotocol.io/" target="_blank" class="read-more">Read docs →</a>
                 </article>
 
                 <article class="related-card">
-                    <div class="related-tag">Case Study</div>
-                    <h3>Scaling AI Agents in Production</h3>
-                    <p>Real-world lessons from deploying agentic systems at scale.</p>
-                    <a href="#" class="read-more">Read more →</a>
+                    <div class="related-tag">Library</div>
+                    <h3>FastMCP GitHub Repository</h3>
+                    <p>Explore the FastMCP library source code, examples, and community-contributed servers.</p>
+                    <a href="https://github.com/jlowin/fastmcp" target="_blank" class="read-more">View on GitHub →</a>
                 </article>
             </div>
         </div>
@@ -1301,26 +1950,34 @@ Total: 3/3 tests passed
             <div class="footer-section">
                 <h4>☕ Brewing Intelligence</h4>
                 <p>Exploring the intersection of AI, protocols, and practical systems.</p>
+                <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.9;">Built with Weather, News, and Finance MCP servers using Python 3.13, FastMCP, and UV.</p>
             </div>
             <div class="footer-section">
                 <h4>Resources</h4>
                 <ul>
-                    <li><a href="https://modelcontextprotocol.io/">MCP Documentation</a></li>
-                    <li><a href="https://www.anthropic.com/">Anthropic</a></li>
-                    <li><a href="https://fastapi.tiangolo.com/">FastAPI</a></li>
+                    <li><a href="https://modelcontextprotocol.io/" target="_blank">MCP Documentation</a></li>
+                    <li><a href="https://github.com/jlowin/fastmcp" target="_blank">FastMCP Library</a></li>
+                    <li><a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol/blob/main/MCP_Guide.html" target="_blank">Complete Implementation Guide</a></li>
+                    <li><a href="https://www.anthropic.com/" target="_blank">Anthropic</a></li>
+                    <li><a href="https://github.com/astral-sh/uv" target="_blank">UV Package Manager</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h4>Navigate</h4>
                 <ul>
-                    <li><a href="index.html">Interactive Version</a></li>
+                    <li><a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank">View on GitHub</a></li>
                     <li><a href="#introduction">Back to Top</a></li>
-                    <li><a href="#">RSS Feed</a></li>
+                    <li><a href="https://kumarjit-pathak.github.io/" target="_blank">Author Website</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2025 Brewing Intelligence. Built with ❤️ and ☕</p>
+            <p style="margin-top: 10px; font-size: 0.85em; opacity: 0.8;">
+                Powered by <a href="https://github.com/jlowin/fastmcp" target="_blank" style="color: inherit; text-decoration: underline;">FastMCP</a> •
+                <a href="https://www.python.org/" target="_blank" style="color: inherit; text-decoration: underline;">Python 3.13</a> •
+                <a href="https://github.com/astral-sh/uv" target="_blank" style="color: inherit; text-decoration: underline;">UV</a>
+            </p>
         </div>
     </footer>
 
