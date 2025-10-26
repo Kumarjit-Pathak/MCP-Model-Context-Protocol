@@ -1,0 +1,2959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MCP Journey: From Zero to Agentic AI | Interactive Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           RESET & BASE STYLES
+        ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color Palette - Modern Gradients */
+            --primary-purple: #667eea;
+            --primary-pink: #f093fb;
+            --primary-blue: #4facfe;
+            --secondary-orange: #ff6b6b;
+            --secondary-green: #51cf66;
+            --secondary-cyan: #22d3ee;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --light-bg: #ffffff;
+            --light-card: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-muted: #64748b;
+
+            /* Gradients */
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #f093fb 50%, #4facfe 100%);
+            --gradient-dark: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            --gradient-light: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+            --gradient-success: linear-gradient(135deg, #51cf66 0%, #22d3ee 100%);
+            --gradient-danger: linear-gradient(135deg, #ff6b6b 0%, #f093fb 100%);
+
+            /* Shadows */
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 16px 64px rgba(0, 0, 0, 0.25);
+            --shadow-neon: 0 0 20px rgba(102, 126, 234, 0.6);
+
+            /* Animations */
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        /* ========================================
+           SCROLL PROGRESS BAR
+        ======================================== */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform-origin: left;
+            transform: scaleX(0);
+            z-index: 10000;
+            transition: transform 0.1s ease;
+        }
+
+        /* ========================================
+           NAVIGATION
+        ======================================== */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow-sm);
+            z-index: 9999;
+            transition: all var(--transition-normal);
+        }
+
+        .main-nav.scrolled {
+            padding: 0.75rem 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width var(--transition-normal);
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary-purple);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 3px;
+            transition: all var(--transition-fast);
+        }
+
+        /* ========================================
+           HERO SECTION
+        ======================================== */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-primary);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 6rem 2rem 4rem;
+        }
+
+        .hero-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: float var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(var(--drift)); opacity: 0; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-title {
+            font-size: 5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-title .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.75rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 1.25rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .cta-btn-primary {
+            background: white;
+            color: var(--primary-purple);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .cta-btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .cta-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* ========================================
+           CONTENT SECTIONS
+        ======================================== */
+        .content-section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .content-section.dark {
+            background: var(--gradient-dark);
+            color: var(--text-light);
+        }
+
+        .content-section.light {
+            background: var(--gradient-light);
+            color: var(--text-dark);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50px;
+            color: var(--primary-purple);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .dark .section-badge {
+            background: rgba(102, 126, 234, 0.2);
+            color: var(--primary-blue);
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .section-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .dark .section-subtitle {
+            color: rgba(241, 245, 249, 0.7);
+        }
+
+        /* ========================================
+           ANIMATED CARDS
+        ======================================== */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .animated-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark .animated-card {
+            background: var(--dark-card);
+        }
+
+        .animated-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-normal);
+        }
+
+        .animated-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .animated-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .dark .card-title {
+            color: var(--text-light);
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+        }
+
+        .dark .card-text {
+            color: rgba(241, 245, 249, 0.8);
+        }
+
+        /* ========================================
+           INTERACTIVE TABLE
+        ======================================== */
+        .interactive-table-container {
+            overflow-x: auto;
+            margin: 3rem 0;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .interactive-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .dark .interactive-table {
+            background: var(--dark-card);
+        }
+
+        .interactive-table thead {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .interactive-table th {
+            padding: 1.5rem;
+            text-align: left;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .interactive-table td {
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-fast);
+        }
+
+        .dark .interactive-table td {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .interactive-table tbody tr {
+            transition: all var(--transition-fast);
+        }
+
+        .interactive-table tbody tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: scale(1.01);
+        }
+
+        .dark .interactive-table tbody tr:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        /* ========================================
+           CODE BLOCKS
+        ======================================== */
+        .code-container {
+            position: relative;
+            margin: 2rem 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .code-header {
+            background: #2d3748;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-lang {
+            color: #a0aec0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .code-copy-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all var(--transition-fast);
+        }
+
+        .code-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .code-block {
+            background: #1a202c;
+            padding: 2rem;
+            overflow-x: auto;
+            color: #e2e8f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .code-block code {
+            color: #e2e8f0;
+        }
+
+        /* ========================================
+           COMPARISON SLIDER
+        ======================================== */
+        .comparison-container {
+            margin: 3rem 0;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .dark .comparison-container {
+            background: var(--dark-card);
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .dark .comparison-row {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-label {
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .comparison-before {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #fee 0%, #fdd 100%);
+            border-radius: 12px;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .comparison-arrow {
+            font-size: 2rem;
+            color: var(--primary-purple);
+        }
+
+        .comparison-after {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-radius: 12px;
+            border-left: 4px solid #51cf66;
+        }
+
+        .comparison-impact {
+            text-align: center;
+        }
+
+        .impact-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-block;
+        }
+
+        .impact-high {
+            background: linear-gradient(135deg, #51cf66 0%, #22d3ee 100%);
+            color: white;
+        }
+
+        /* ========================================
+           STEP CARDS
+        ======================================== */
+        .step-container {
+            margin: 3rem 0;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .dark .step-card {
+            background: var(--dark-card);
+        }
+
+        .step-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            font-size: 12rem;
+            font-weight: 900;
+            color: rgba(102, 126, 234, 0.05);
+            z-index: 0;
+        }
+
+        .step-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .dark .step-title {
+            color: var(--text-light);
+        }
+
+        .step-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ========================================
+           ACCORDION
+        ======================================== */
+        .accordion-container {
+            margin: 3rem 0;
+        }
+
+        .accordion-item {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .dark .accordion-item {
+            background: var(--dark-card);
+        }
+
+        .accordion-item.active {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .accordion-header {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all var(--transition-fast);
+        }
+
+        .accordion-header:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .dark .accordion-header:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .accordion-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .dark .accordion-title {
+            color: var(--text-light);
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            transition: transform var(--transition-normal);
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 2000px;
+        }
+
+        .accordion-body {
+            padding: 0 2rem 2rem 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* ========================================
+           AUTHOR SECTION
+        ======================================== */
+        .author-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 4rem;
+            border-radius: 20px;
+            margin: 4rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .author-content {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow-lg);
+            border: 5px solid white;
+            flex-shrink: 0;
+        }
+
+        .author-info h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .author-info p {
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .author-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .author-link {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            color: var(--primary-purple);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+            transition: all var(--transition-normal);
+        }
+
+        .author-link:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ========================================
+           EXPLORE BUTTONS & MODALS
+        ======================================== */
+        .explore-btn {
+            margin-top: 1.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            box-shadow: var(--shadow-md);
+            display: block;
+            width: 100%;
+        }
+
+        .explore-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .clickable-card {
+            position: relative;
+        }
+
+        .clickable-card::after {
+            content: '👉 Click to explore';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity var(--transition-normal);
+        }
+
+        .clickable-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .dark .modal-content {
+            background: var(--dark-card);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .modal-close {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-body h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .dark .modal-body h3 {
+            color: var(--text-light);
+        }
+
+        .modal-code {
+            background: #1a202c;
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .modal-code pre {
+            margin: 0;
+            color: #e2e8f0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .modal-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-purple);
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+        .main-footer {
+            background: var(--gradient-dark);
+            color: var(--text-light);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: rgba(241, 245, 249, 0.8);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(241, 245, 249, 0.6);
+        }
+
+        /* ========================================
+           ANIMATIONS
+        ======================================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========================================
+           RESPONSIVE
+        ======================================== */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 4rem;
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .cta-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .content-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .author-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .comparison-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .comparison-arrow {
+                transform: rotate(90deg);
+            }
+
+            .interactive-table-container {
+                overflow-x: scroll;
+            }
+        }
+
+        /* ========================================
+           UTILITY CLASSES
+        ======================================== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 {
+            margin-bottom: 2rem;
+        }
+
+        .mb-4 {
+            margin-bottom: 4rem;
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-box {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 4px solid var(--primary-purple);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .dark .info-box {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .warning-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid var(--secondary-orange);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .success-box {
+            background: rgba(81, 207, 102, 0.1);
+            border-left: 4px solid var(--secondary-green);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-container">
+            <div class="nav-logo">MCP Journey</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 8px 16px; border-radius: 20px; font-weight: 600; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">📖 Detailed Article</a></li>
+                <li><a href="#hero" class="nav-link active">Home</a></li>
+                <li><a href="#introduction" class="nav-link">Introduction</a></li>
+                <li><a href="#challenges" class="nav-link">Challenges</a></li>
+                <li><a href="#mcp" class="nav-link">MCP</a></li>
+                <li><a href="#building" class="nav-link">Build</a></li>
+                <li><a href="#guide" class="nav-link">Guide</a></li>
+                <li><a href="#author" class="nav-link">Author</a></li>
+            </ul>
+            <button class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-particles" id="heroParticles"></div>
+        <div class="hero-content">
+            <div class="hero-badge">Interactive Learning Experience</div>
+            <h1 class="hero-title">
+                <span class="gradient-text">From Chai Orders</span><br>
+                to MCP Servers
+            </h1>
+            <p class="hero-subtitle">A Complete Interactive Journey Through Agentic AI</p>
+            <p class="hero-description">
+                Discover how the Model Context Protocol revolutionizes AI systems through
+                interactive stories, animated examples, and hands-on guides. No content missed,
+                everything enhanced.
+            </p>
+            <div class="hero-cta">
+                <a href="#introduction" class="cta-btn cta-btn-primary">
+                    <span>🚀 Start Your Journey</span>
+                </a>
+                <a href="#guide" class="cta-btn cta-btn-secondary">
+                    <span>📖 Implementation Guide</span>
+                </a>
+            </div>
+        </div>
+        <div class="scroll-indicator" onclick="document.querySelector('#introduction').scrollIntoView({behavior: 'smooth'})">
+            ↓
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="content-section light reveal" id="introduction">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Chapter 1</div>
+                <h2 class="section-title">The Chai Order That Changed Everything</h2>
+                <p class="section-subtitle">
+                    How a simple conversation about ordering tea reveals the fundamental challenges
+                    and solutions in building intelligent AI agents.
+                </p>
+            </div>
+
+            <div class="card-grid">
+                <div class="animated-card">
+                    <span class="card-icon">☕</span>
+                    <h3 class="card-title">The Problem</h3>
+                    <p class="card-text">
+                        "Order me a chai from Starbucks" seems simple. But for an AI agent,
+                        it requires real-time access to location data, menu information,
+                        payment systems, and delivery APIs.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">🤖</span>
+                    <h3 class="card-title">Current Limitation</h3>
+                    <p class="card-text">
+                        Traditional chatbots are stuck in their training data. They can discuss
+                        tea philosophically but can't actually order one. The world moves too fast
+                        for static knowledge.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">⚡</span>
+                    <h3 class="card-title">The Solution</h3>
+                    <p class="card-text">
+                        MCP (Model Context Protocol) provides a standardized way for AI agents
+                        to access real-world tools and data sources, transforming static chatbots
+                        into dynamic, capable agents.
+                    </p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">💡 Key Insight</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    The gap between "knowing about" something and "doing" something is where agentic AI
+                    excels. MCP is the bridge that transforms knowledge into action.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Agentic AI Section -->
+    <section class="content-section dark reveal" id="agentic-ai">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Chapter 2</div>
+                <h2 class="section-title">Understanding Agentic AI</h2>
+                <p class="section-subtitle">
+                    What makes an AI "agentic"? The ability to perceive, reason, decide, and act
+                    autonomously to achieve goals.
+                </p>
+            </div>
+
+            <div class="step-container">
+                <div class="step-card" data-step="1">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Perception & Context</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text">
+                            <strong>Traditional AI:</strong> "I know Starbucks exists."<br>
+                            <strong>Agentic AI:</strong> "I see the nearest Starbucks is 0.3 miles away,
+                            currently open, with an 8-minute wait time."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="2">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Reasoning & Planning</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text">
+                            <strong>Traditional AI:</strong> "I can tell you about chai ingredients."<br>
+                            <strong>Agentic AI:</strong> "I'll check the menu, verify it's available,
+                            calculate the total cost including tax, and prepare the order sequence."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="3">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Decision Making</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text">
+                            <strong>Traditional AI:</strong> "Let me ask the user what to do."<br>
+                            <strong>Agentic AI:</strong> "I've selected 'Chai Tea Latte' based on your
+                            preferences and dietary restrictions. Proceeding with size: Grande."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="4">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Action & Execution</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text">
+                            <strong>Traditional AI:</strong> "Here's a link to Starbucks."<br>
+                            <strong>Agentic AI:</strong> "Order placed successfully! Confirmation #12345.
+                            Estimated ready time: 12:15 PM. I've added it to your calendar."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">✅ The Four Pillars of Agentic AI</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    <strong>Perception:</strong> Real-time awareness of the environment<br>
+                    <strong>Reasoning:</strong> Understanding context and constraints<br>
+                    <strong>Decision:</strong> Autonomous choice-making within guidelines<br>
+                    <strong>Action:</strong> Direct execution through integrated tools
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Case Section -->
+    <section class="content-section light reveal" id="business-case">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Chapter 3</div>
+                <h2 class="section-title">The Business Case for Agentic Systems</h2>
+                <p class="section-subtitle">
+                    Why enterprises are investing billions in agentic AI: automation, personalization,
+                    and scale.
+                </p>
+            </div>
+
+            <div class="card-grid">
+                <div class="animated-card">
+                    <span class="card-icon">💼</span>
+                    <h3 class="card-title">$18.1 Trillion Impact</h3>
+                    <p class="card-text">
+                        PwC predicts AI will contribute $15.7 trillion to global GDP by 2030.
+                        McKinsey estimates $2.4 trillion in enterprise operations alone.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">⚡</span>
+                    <h3 class="card-title">40% Time Savings</h3>
+                    <p class="card-text">
+                        Agentic systems reduce manual tasks by 40-60%, allowing humans to focus
+                        on strategic work while agents handle routine operations.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">🎯</span>
+                    <h3 class="card-title">Personalization at Scale</h3>
+                    <p class="card-text">
+                        Agents can tailor experiences for millions of users simultaneously,
+                        something impossible with human-only teams.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">🔄</span>
+                    <h3 class="card-title">24/7 Operations</h3>
+                    <p class="card-text">
+                        Continuous monitoring, instant response, and proactive problem-solving
+                        across time zones and business hours.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">📊</span>
+                    <h3 class="card-title">Data-Driven Decisions</h3>
+                    <p class="card-text">
+                        Agents analyze millions of data points in real-time, identifying patterns
+                        and opportunities humans might miss.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">🚀</span>
+                    <h3 class="card-title">Competitive Advantage</h3>
+                    <p class="card-text">
+                        Early adopters gain 2-3 year leads in automation, customer experience,
+                        and operational efficiency.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Challenges Section -->
+    <section class="content-section dark reveal" id="challenges">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Chapter 4</div>
+                <h2 class="section-title">Challenges in Building Autonomous Agents</h2>
+                <p class="section-subtitle">
+                    Before MCP, building agentic AI was fraught with complexity. Let's explore
+                    the major obstacles.
+                </p>
+            </div>
+
+            <div class="interactive-table-container">
+                <table class="interactive-table">
+                    <thead>
+                        <tr>
+                            <th>Challenge</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                            <th>Impact</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>⚠️ Tool Hallucination</strong></td>
+                            <td>LLMs invent non-existent functions when they don't know what tools are available</td>
+                            <td>Agent tries to call <code>orderQuantumChai()</code> which doesn't exist</td>
+                            <td><span class="impact-badge" style="background: #ff6b6b; color: white;">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>🔌 Integration Hell</strong></td>
+                            <td>Every API has different authentication, data formats, and error handling</td>
+                            <td>Connecting 10 services requires 10 custom integrations, each breaking differently</td>
+                            <td><span class="impact-badge" style="background: #ff6b6b; color: white;">High</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>🔐 Security Risks</strong></td>
+                            <td>Agents with broad access can accidentally (or maliciously) cause damage</td>
+                            <td>Agent with database access accidentally runs <code>DROP TABLE users</code></td>
+                            <td><span class="impact-badge" style="background: #ff6b6b; color: white;">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>🤖 Lack of Standardization</strong></td>
+                            <td>Every tool integration is a custom snowflake requiring unique code</td>
+                            <td>Switching from OpenAI to Claude requires rewriting entire agent architecture</td>
+                            <td><span class="impact-badge" style="background: #f59f00; color: white;">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>🐛 Debugging Nightmares</strong></td>
+                            <td>When something fails, it's unclear whether it's the LLM, the tool, or the integration</td>
+                            <td>"Payment failed" - Is it the API key? Network? LLM logic? Good luck figuring it out.</td>
+                            <td><span class="impact-badge" style="background: #f59f00; color: white;">High</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="warning-box">
+                <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">⚠️ The Core Problem</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    Before MCP, there was no standard protocol for LLMs to discover and invoke tools.
+                    Each implementation was custom, brittle, and impossible to maintain at scale.
+                    The industry needed a "USB-C moment" for AI tool integration.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MCP Introduction Section -->
+    <section class="content-section light reveal" id="mcp">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Chapter 5</div>
+                <h2 class="section-title">Introducing the Model Context Protocol</h2>
+                <p class="section-subtitle">
+                    The USB-C of AI: One standard protocol for connecting AI systems to data and tools.
+                </p>
+            </div>
+
+            <div class="info-box mb-4">
+                <h4 style="margin-bottom: 1rem; font-size: 1.5rem;">🔌 What is MCP?</h4>
+                <p style="font-size: 1.15rem; line-height: 1.8; margin-bottom: 1rem;">
+                    The <strong>Model Context Protocol (MCP)</strong> is an open standard that enables
+                    AI applications to securely connect to external data sources and tools. Think of it
+                    as the universal adapter for AI systems.
+                </p>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    Just as USB-C replaced dozens of proprietary charging cables, MCP replaces hundreds
+                    of custom AI integrations with one universal protocol.
+                </p>
+            </div>
+
+            <div class="card-grid">
+                <div class="animated-card">
+                    <span class="card-icon">🧠</span>
+                    <h3 class="card-title">MCP Client</h3>
+                    <p class="card-text">
+                        The AI application (Claude, ChatGPT, your custom agent) that needs to access
+                        external tools. Acts as the "host" requesting services.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">🔧</span>
+                    <h3 class="card-title">MCP Server</h3>
+                    <p class="card-text">
+                        Lightweight programs exposing specific capabilities (database queries, API calls,
+                        file operations). Each server is a "tool provider."
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">🔌</span>
+                    <h3 class="card-title">MCP Protocol</h3>
+                    <p class="card-text">
+                        The standardized communication layer defining how clients discover servers,
+                        what tools are available, and how to invoke them safely.
+                    </p>
+                </div>
+            </div>
+
+            <div class="comparison-container mb-4">
+                <h3 style="margin-bottom: 2rem; font-size: 2rem; text-align: center;">Before MCP vs. With MCP</h3>
+
+                <div class="comparison-row">
+                    <div class="comparison-label">Tool Discovery</div>
+                    <div class="comparison-before">
+                        <strong>Before:</strong> Hardcoded function names in prompts. Agent hallucinates non-existent tools.
+                    </div>
+                    <div class="comparison-arrow">→</div>
+                    <div class="comparison-after">
+                        <strong>With MCP:</strong> Dynamic discovery via <code>/tools/list</code>. Agent sees only real, available tools.
+                    </div>
+                    <div class="comparison-impact">
+                        <span class="impact-badge impact-high">✅ Eliminates hallucination</span>
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-label">Integration</div>
+                    <div class="comparison-before">
+                        <strong>Before:</strong> Custom code for each API. Different auth, formats, error handling for every service.
+                    </div>
+                    <div class="comparison-arrow">→</div>
+                    <div class="comparison-after">
+                        <strong>With MCP:</strong> Single protocol for all tools. Write once, connect to any MCP server.
+                    </div>
+                    <div class="comparison-impact">
+                        <span class="impact-badge impact-high">✅ 90% less integration code</span>
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-label">Security</div>
+                    <div class="comparison-before">
+                        <strong>Before:</strong> Agents get full API access. One mistake = disaster. No audit trail.
+                    </div>
+                    <div class="comparison-arrow">→</div>
+                    <div class="comparison-after">
+                        <strong>With MCP:</strong> Fine-grained permissions per tool. Server-side validation. Full audit logs.
+                    </div>
+                    <div class="comparison-impact">
+                        <span class="impact-badge impact-high">✅ Production-grade security</span>
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-label">Maintainability</div>
+                    <div class="comparison-before">
+                        <strong>Before:</strong> When API changes, agent code breaks. Manual updates for every integration.
+                    </div>
+                    <div class="comparison-arrow">→</div>
+                    <div class="comparison-after">
+                        <strong>With MCP:</strong> Servers handle API changes internally. Agent code stays unchanged.
+                    </div>
+                    <div class="comparison-impact">
+                        <span class="impact-badge impact-high">✅ Future-proof architecture</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">✨ The MCP Advantage</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    MCP transforms AI development from "write custom integration for every tool" to
+                    "connect to any MCP server instantly." It's the difference between building a
+                    proprietary charging cable for every device vs. using USB-C for everything.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Building Your First MCP Server Section -->
+    <section class="content-section dark reveal" id="building">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Chapter 6</div>
+                <h2 class="section-title">Building Your First MCP Server</h2>
+                <p class="section-subtitle">
+                    Time to get our hands dirty! Let's build real MCP servers with Weather, News, and Finance APIs.
+                </p>
+            </div>
+
+            <div class="info-box mb-4">
+                <h4 style="margin-bottom: 1rem; font-size: 1.4rem;">💼 What We're Building</h4>
+                <p style="font-size: 1.1rem; line-height: 1.8;">
+                    A complete MCP ecosystem with 3 production servers + 1 intelligent client. Total code: ~860 lines.
+                    What would normally take thousands of lines with traditional approaches.
+                </p>
+            </div>
+
+            <div class="card-grid">
+                <div class="animated-card">
+                    <span class="card-icon">🌤️</span>
+                    <h3 class="card-title">Weather Server</h3>
+                    <p class="card-text">Real-time weather data and forecasts using OpenWeatherMap API</p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">📰</span>
+                    <h3 class="card-title">News Server</h3>
+                    <p class="card-text">Latest headlines and article search powered by NewsAPI</p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">💱</span>
+                    <h3 class="card-title">Finance Server</h3>
+                    <p class="card-text">Currency exchange rates and conversions</p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">⚡</span>
+                    <h3 class="card-title">Smart Client</h3>
+                    <p class="card-text">LLM-powered orchestration with Claude/GPT integration</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0;">
+                <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank" class="cta-btn cta-btn-primary" style="background: var(--primary-blue); color: white;">
+                    ⭐ View Full Code on GitHub
+                </a>
+            </div>
+
+            <div class="step-container">
+                <div class="step-card" data-step="1">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Project Setup with UV</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text mb-2">
+                            UV is like npm but for Python—fast, modern, and 10-100x faster than pip.
+                        </p>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">bash</span>
+                                <button class="code-copy-btn">Copy Code</button>
+                            </div>
+                            <div class="code-block"><code># Install UV
+pip install uv
+
+# Create project
+mkdir mcp-servers && cd mcp-servers
+uv init .
+
+# Install dependencies
+uv add "mcp[cli]" httpx python-dotenv anthropic openai
+
+# Create structure
+mkdir server client examples</code></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="2">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Environment Variables</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text mb-2">
+                            Create a <code>.env</code> file with your API keys. Don't forget to add it to <code>.gitignore</code>!
+                        </p>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">.env</span>
+                                <button class="code-copy-btn">Copy Code</button>
+                            </div>
+                            <div class="code-block"><code># LLM Provider
+ANTHROPIC_API_KEY=your_claude_key
+OPENAI_API_KEY=your_openai_key
+LLM_PROVIDER=openai
+
+# External APIs
+OPENWEATHER_API_KEY=your_key
+NEWS_API_KEY=your_key
+EXCHANGERATE_API_KEY=your_key</code></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="3">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Build the Weather Server</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text mb-2">
+                            Using <strong>FastMCP</strong>, building an MCP server is incredibly simple.
+                            Just add decorators to your functions!
+                        </p>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python</span>
+                                <button class="code-copy-btn">Copy Code</button>
+                            </div>
+                            <div class="code-block"><code>"""Weather MCP Server"""
+import os
+import httpx
+from mcp.server.fastmcp import FastMCP
+from dotenv import load_dotenv
+
+load_dotenv()
+mcp = FastMCP(name="weather")
+
+@mcp.tool()
+async def get_current_weather(location: str, units: str = "metric") -> str:
+    """Get current weather for any location.
+
+    Args:
+        location: City name (e.g., "London")
+        units: "metric", "imperial", or "standard"
+    """
+    api_key = os.getenv("OPENWEATHER_API_KEY")
+    url = f"https://api.openweathermap.org/data/2.5/weather"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, params={
+            "q": location,
+            "appid": api_key,
+            "units": units
+        })
+        data = response.json()
+
+    return f"""Weather in {data['name']}:
+Temperature: {data['main']['temp']}°C
+Conditions: {data['weather'][0]['description']}
+Humidity: {data['main']['humidity']}%"""
+
+if __name__ == "__main__":
+    mcp.run()</code></div>
+                        </div>
+                        <div class="success-box" style="margin-top: 2rem;">
+                            <h4 style="margin-bottom: 1rem;">🎯 Zero Boilerplate!</h4>
+                            <p style="font-size: 1.05rem;">
+                                Notice we didn't write discovery APIs, schema generation, or validation?
+                                FastMCP handles everything automatically by parsing docstrings and type hints!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="4">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Build the Intelligent Client</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text mb-2">
+                            The client connects to servers, discovers tools, and uses an LLM to decide which tools to call.
+                        </p>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">python</span>
+                                <button class="code-copy-btn">Copy Code</button>
+                            </div>
+                            <div class="code-block"><code>"""MCP Client - The brains of the operation"""
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+from anthropic import Anthropic
+
+class MCPClient:
+    def __init__(self):
+        self.tools = []
+        self.session = None
+        self.llm = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+    async def connect_to_server(self, server_script: str):
+        """Connect to MCP server and discover tools."""
+        server = StdioServerParameters(
+            command="python",
+            args=[server_script]
+        )
+
+        stdio = stdio_client(server)
+        read_stream, write_stream = await stdio.__aenter__()
+
+        self.session = ClientSession(read_stream, write_stream)
+        await self.session.__aenter__()
+        await self.session.initialize()
+
+        # Discover tools
+        tools_result = await self.session.list_tools()
+        self.tools = [
+            {
+                "name": tool.name,
+                "description": tool.description,
+                "inputSchema": tool.inputSchema
+            }
+            for tool in tools_result.tools
+        ]
+
+    async def chat(self, user_message: str) -> str:
+        """Process message using LLM and tools."""
+        response = self.llm.messages.create(
+            model="claude-3-5-sonnet-20241022",
+            messages=[{"role": "user", "content": user_message}],
+            tools=self.tools
+        )
+
+        # LLM decides which tool to call
+        if response.stop_reason == "tool_use":
+            for tool_use in response.content:
+                if tool_use.type == "tool_use":
+                    # Invoke tool via MCP
+                    result = await self.session.call_tool(
+                        tool_use.name,
+                        tool_use.input
+                    )
+                    # Process result...
+
+        return response.content[0].text</code></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card" data-step="5">
+                    <div class="step-header">
+                        <div class="step-number">5</div>
+                        <h3 class="step-title">Test Your Creation</h3>
+                    </div>
+                    <div class="step-content">
+                        <p class="card-text mb-2">Run the automated tests to verify everything works:</p>
+                        <div class="code-container">
+                            <div class="code-header">
+                                <span class="code-lang">bash</span>
+                                <button class="code-copy-btn">Copy Code</button>
+                            </div>
+                            <div class="code-block"><code># Run tests
+uv run python examples/test_demo.py
+
+# Output:
+# [PASS] Weather Server - 2 tools discovered
+# [PASS] News Server - 2 tools discovered
+# [PASS] Finance Server - 3 tools discovered
+# Total: 3/3 tests passed ✓</code></div>
+                        </div>
+                        <div class="success-box" style="margin-top: 2rem;">
+                            <h4>🎉 Victory!</h4>
+                            <ul style="font-size: 1.05rem; line-height: 1.8;">
+                                <li>3 production MCP servers with 7 tools</li>
+                                <li>1 intelligent client with LLM integration</li>
+                                <li>Automatic tool discovery and invocation</li>
+                                <li>~860 lines of clean, production-ready code</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Guide Section -->
+    <section class="content-section light reveal" id="guide">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Implementation Guide</div>
+                <h2 class="section-title">FastMCP Complete Implementation</h2>
+                <p class="section-subtitle">
+                    Everything you need to go from zero to production with FastMCP.
+                </p>
+            </div>
+
+            <div class="card-grid">
+                <div class="animated-card clickable-card" data-modal="setup-modal" style="cursor: pointer;">
+                    <span class="card-icon">📚</span>
+                    <h3 class="card-title">Part 1: Setup</h3>
+                    <p class="card-text">Install Python 3.13, UV package manager, configure environment, install dependencies</p>
+                    <button class="explore-btn">Click to Explore</button>
+                </div>
+
+                <div class="animated-card clickable-card" data-modal="servers-modal" style="cursor: pointer;">
+                    <span class="card-icon">🔧</span>
+                    <h3 class="card-title">Part 2: Build Servers</h3>
+                    <p class="card-text">Create Weather, News, and Finance MCP servers with FastMCP decorators</p>
+                    <button class="explore-btn">View Full Code</button>
+                </div>
+
+                <div class="animated-card clickable-card" data-modal="client-modal" style="cursor: pointer;">
+                    <span class="card-icon">🧠</span>
+                    <h3 class="card-title">Part 3: Build Client</h3>
+                    <p class="card-text">LLM provider abstraction, tool discovery, iterative calling, chat interface</p>
+                    <button class="explore-btn">View Implementation</button>
+                </div>
+
+                <div class="animated-card clickable-card" data-modal="testing-modal" style="cursor: pointer;">
+                    <span class="card-icon">✅</span>
+                    <h3 class="card-title">Part 4: Testing</h3>
+                    <p class="card-text">Automated tests, interactive demo, integration testing, debugging</p>
+                    <button class="explore-btn">See Examples</button>
+                </div>
+
+                <div class="animated-card clickable-card" data-modal="extending-modal" style="cursor: pointer;">
+                    <span class="card-icon">🚀</span>
+                    <h3 class="card-title">Part 5: Extending</h3>
+                    <p class="card-text">Add custom tools, modify components, production checklist, best practices</p>
+                    <button class="explore-btn">Learn How</button>
+                </div>
+
+                <div class="animated-card clickable-card" data-modal="monitoring-modal" style="cursor: pointer;">
+                    <span class="card-icon">📊</span>
+                    <h3 class="card-title">Part 6: Monitoring</h3>
+                    <p class="card-text">LangSmith setup, trace tool calls, performance metrics, cost tracking</p>
+                    <button class="explore-btn">Explore Tools</button>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: 3rem 0;">
+                <a href="https://kumarjit-pathak.github.io/MCP-Model-Context-Protocol/MCP_Guide.html" target="_blank" class="cta-btn cta-btn-primary">
+                    📖 View Complete Implementation Guide
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Production & Security Section -->
+    <section class="content-section dark reveal" id="production">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">Production Ready</div>
+                <h2 class="section-title">Deployment, Security & Best Practices</h2>
+                <p class="section-subtitle">
+                    Everything you need to know before going to production.
+                </p>
+            </div>
+
+            <div class="accordion-container">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">🚀 Production Deployment Options</h3>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">Option 1: Desktop/Local Applications</h4>
+                            <p style="margin-bottom: 1rem;">MCP servers using stdio transport are perfect for:</p>
+                            <ul style="margin-bottom: 2rem; line-height: 1.8;">
+                                <li>Claude Desktop integration</li>
+                                <li>Local development tools</li>
+                                <li>Personal productivity apps</li>
+                                <li>Single-user environments</li>
+                            </ul>
+
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">Option 2: Cloud/HTTP Deployment</h4>
+                            <p style="margin-bottom: 1rem;">For multi-user scenarios, wrap your servers in HTTP:</p>
+                            <ul style="line-height: 1.8;">
+                                <li>Deploy to AWS, GCP, Azure, or any cloud provider</li>
+                                <li>Use Docker containers for portability</li>
+                                <li>Add authentication (OAuth, API keys)</li>
+                                <li>Implement rate limiting and caching</li>
+                                <li>Set up monitoring and logging</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">🔐 Security Best Practices</h3>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">Authentication & Authorization</h4>
+                            <ul style="margin-bottom: 2rem; line-height: 1.8;">
+                                <li><strong>Never hardcode API keys</strong> - Use environment variables</li>
+                                <li><strong>Principle of least privilege</strong> - Give tools minimum necessary permissions</li>
+                                <li><strong>Validate all inputs</strong> - Never trust user input or LLM output</li>
+                                <li><strong>Audit logs</strong> - Track every tool invocation</li>
+                            </ul>
+
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">FastMCP-Specific Security</h4>
+                            <ul style="line-height: 1.8;">
+                                <li>Server-side validation for all tool parameters</li>
+                                <li>Rate limiting to prevent abuse</li>
+                                <li>Timeout enforcement for long-running operations</li>
+                                <li>Error handling that doesn't leak sensitive info</li>
+                                <li>Sandboxed execution environments when possible</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">⚠️ Limitations & Real-World Considerations</h3>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">1. API Costs Can Add Up</h4>
+                            <p style="margin-bottom: 1.5rem;">At 1000 conversations/day: $4-40/day in LLM costs. Use cheaper models (GPT-4o-mini, Claude Haiku) and implement caching.</p>
+
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">2. Tool Selection Isn't Perfect</h4>
+                            <p style="margin-bottom: 1.5rem;">LLMs sometimes call the wrong tool or forget to call tools. Mitigate with better tool descriptions and few-shot examples.</p>
+
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">3. Stdio Limitations</h4>
+                            <p style="margin-bottom: 1.5rem;">One client per server, local only. For multi-user scenarios, switch to HTTP transport.</p>
+
+                            <h4 style="margin-bottom: 1rem; font-size: 1.3rem;">4. Complexity Doesn't Disappear</h4>
+                            <p>You still need error handling, logging, monitoring, API key rotation, rate limiting, and testing. FastMCP eliminates infrastructure complexity, not domain complexity.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3 class="accordion-title">📋 Production Checklist</h3>
+                        <span class="accordion-icon">▼</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            <ul style="line-height: 2;">
+                                <li>✅ Environment variables for all secrets</li>
+                                <li>✅ Comprehensive error handling</li>
+                                <li>✅ Request timeouts configured</li>
+                                <li>✅ Rate limiting implemented</li>
+                                <li>✅ Logging and monitoring active</li>
+                                <li>✅ Automated tests passing</li>
+                                <li>✅ Docker container built and tested</li>
+                                <li>✅ Security audit completed</li>
+                                <li>✅ Documentation written</li>
+                                <li>✅ Incident response plan ready</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conclusion Section -->
+    <section class="content-section light reveal" id="conclusion">
+        <div class="section-container">
+            <div class="section-header">
+                <div class="section-badge">The Journey Complete</div>
+                <h2 class="section-title">From Zero to Agentic AI</h2>
+                <p class="section-subtitle">
+                    We started with a question: What if AI agents could access real-world data?
+                </p>
+            </div>
+
+            <div class="info-box mb-4" style="font-size: 1.1rem;">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem;">The Journey We Took</h3>
+                <ol style="line-height: 2;">
+                    <li><strong>Understanding the Problem:</strong> Traditional chatbots are stuck in training data</li>
+                    <li><strong>Discovering the Solution:</strong> MCP provides a standard protocol for tools</li>
+                    <li><strong>Building Real Tools:</strong> Weather, news, currency—genuinely useful services</li>
+                    <li><strong>Creating Intelligence:</strong> LLM-powered client that autonomously selects tools</li>
+                    <li><strong>Deploying Responsibly:</strong> Security, monitoring, error handling</li>
+                </ol>
+            </div>
+
+            <div class="card-grid">
+                <div class="animated-card">
+                    <span class="card-icon">🎯</span>
+                    <h3 class="card-title">What You've Gained</h3>
+                    <p class="card-text">
+                        Knowledge of MCP protocol, FastMCP library, agentic AI patterns, and production deployment.
+                        You can now build intelligent systems that actually interact with the world.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">🌍</span>
+                    <h3 class="card-title">The Bigger Picture</h3>
+                    <p class="card-text">
+                        MCP is becoming the universal standard for AI tool integration. Early adopters are building
+                        competitive advantages in automation and intelligence.
+                    </p>
+                </div>
+
+                <div class="animated-card">
+                    <span class="card-icon">🚀</span>
+                    <h3 class="card-title">What's Next?</h3>
+                    <p class="card-text">
+                        Build your own MCP servers! Customer databases, documentation search, deployment triggers,
+                        Slack integrations—the possibilities are endless.
+                    </p>
+                </div>
+            </div>
+
+            <div class="success-box" style="margin-top: 3rem; padding: 3rem; text-align: center;">
+                <h3 style="margin-bottom: 1rem; font-size: 2rem;">🎉 The Real Limitation: Your Imagination</h3>
+                <p style="font-size: 1.2rem; line-height: 1.8;">
+                    The protocol is solved. The infrastructure is handled. Now comes the creative part:
+                    <strong style="display: block; margin-top: 1rem; font-size: 1.4rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                        What will you build?
+                    </strong>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Author Section -->
+    <section class="content-section dark reveal" id="author">
+        <div class="section-container">
+            <div class="author-section">
+                <h3 style="text-align: center; margin-bottom: 3rem; font-size: 2.5rem; color: #fff;">About the Author</h3>
+                <div class="author-content">
+                    <img src="Kumarjit Pathak Photo.jpg" alt="Kumarjit Pathak" class="author-avatar">
+                    <div class="author-info">
+                        <h3>Kumarjit Pathak</h3>
+                        <p>
+                            Visionary AI Leader and passionate scientist exploring the intersection of artificial
+                            intelligence, agentic systems, and modern protocols. Creator of multiple award-winning
+                            AI products and advocate for clean, maintainable AI systems.
+                        </p>
+                        <div class="author-links">
+                            <a href="https://kumarjit-pathak.github.io/" target="_blank" class="author-link">
+                                🌐 Visit Website
+                            </a>
+                            <a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank" class="author-link">
+                                ⭐ View on GitHub
+                            </a>
+                            <a href="https://kumarjit-pathak.github.io/MCP-Model-Context-Protocol/MCP_Guide.html" target="_blank" class="author-link">
+                                📖 Implementation Guide
+                            </a>
+                        </div>
+                        <p style="font-style: italic; margin-top: 2rem; text-align: center; color: rgba(255,255,255,0.8);">
+                            "Building AI systems that are modular, secure, and genuinely useful—one MCP server at a time."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resources & Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="https://modelcontextprotocol.io" target="_blank">MCP Protocol</a></li>
+                        <li><a href="https://gofastmcp.com" target="_blank">FastMCP Docs</a></li>
+                        <li><a href="https://github.com/modelcontextprotocol/python-sdk" target="_blank">Python SDK</a></li>
+                        <li><a href="https://kumarjit-pathak.github.io/MCP-Model-Context-Protocol/MCP_Guide.html" target="_blank">Implementation Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>External APIs</h4>
+                    <ul>
+                        <li><a href="https://openweathermap.org/api" target="_blank">OpenWeatherMap</a></li>
+                        <li><a href="https://newsapi.org" target="_blank">NewsAPI</a></li>
+                        <li><a href="https://www.exchangerate-api.com" target="_blank">ExchangeRate-API</a></li>
+                        <li><a href="https://smith.langchain.com" target="_blank">LangSmith Monitoring</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>LLM Providers</h4>
+                    <ul>
+                        <li><a href="https://www.anthropic.com" target="_blank">Anthropic Claude</a></li>
+                        <li><a href="https://openai.com" target="_blank">OpenAI GPT</a></li>
+                        <li><a href="https://python.langchain.com" target="_blank">LangChain</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/Kumarjit-Pathak/MCP-Model-Context-Protocol" target="_blank">GitHub Repository</a></li>
+                        <li><a href="https://kumarjit-pathak.github.io/" target="_blank">Author Website</a></li>
+                        <li><a href="#hero">Back to Top</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 MCP Interactive Journey | Built with FastMCP + Python 3.13 + UV</p>
+                <p style="margin-top: 0.5rem;">Created by Kumarjit Pathak | MIT License</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <!-- Setup Modal -->
+    <div id="setup-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Part 1: Project Setup</h2>
+                <button class="modal-close" onclick="closeModal('setup-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Setting up your MCP development environment with Python 3.13, UV package manager, and all necessary dependencies.
+                </p>
+
+                <h3>Step 1: Install UV</h3>
+                <div class="modal-code">
+                    <pre># Install UV - The fast Python package manager
+pip install uv
+
+# Verify installation
+uv --version</pre>
+                </div>
+
+                <h3>Step 2: Create Project Structure</h3>
+                <div class="modal-code">
+                    <pre># Create and initialize project
+mkdir mcp-servers && cd mcp-servers
+uv init .
+
+# Create folder structure
+mkdir server client examples
+
+# Install core dependencies
+uv add "mcp[cli]" httpx python-dotenv anthropic openai</pre>
+                </div>
+
+                <h3>Step 3: Configure Environment</h3>
+                <p>Create a <code>.env</code> file with your API keys:</p>
+                <div class="modal-code">
+                    <pre># .env file
+# LLM Provider Keys
+ANTHROPIC_API_KEY=your_claude_key_here
+OPENAI_API_KEY=your_openai_key_here
+LLM_PROVIDER=openai  # or "anthropic"
+
+# External API Keys
+OPENWEATHER_API_KEY=your_weather_key
+NEWS_API_KEY=your_news_key
+EXCHANGERATE_API_KEY=your_finance_key</pre>
+                </div>
+
+                <div class="modal-section">
+                    <h4>Why UV?</h4>
+                    <ul style="line-height: 2;">
+                        <li>⚡ 10-100x faster than pip</li>
+                        <li>🔒 Deterministic dependency resolution</li>
+                        <li>📦 Built-in virtual environment management</li>
+                        <li>🦀 Written in Rust for maximum performance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Servers Modal -->
+    <div id="servers-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Part 2: Build MCP Servers</h2>
+                <button class="modal-close" onclick="closeModal('servers-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Complete source code for Weather, News, and Finance MCP servers using FastMCP.
+                </p>
+
+                <h3>Weather Server (server/weather_server.py)</h3>
+                <div class="modal-code">
+                    <pre>"""Weather MCP Server - OpenWeatherMap Integration"""
+import os
+import httpx
+from typing import Any
+from mcp.server.fastmcp import FastMCP
+from dotenv import load_dotenv
+
+load_dotenv()
+mcp = FastMCP(name="weather")
+
+OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY", "")
+OPENWEATHER_BASE_URL = "https://api.openweathermap.org/data/2.5"
+
+@mcp.tool()
+async def get_current_weather(location: str, units: str = "metric") -> str:
+    """Get current weather for any location.
+
+    Args:
+        location: City name (e.g., "London", "Tokyo")
+        units: "metric", "imperial", or "standard"
+    """
+    url = f"{OPENWEATHER_BASE_URL}/weather?q={location}&appid={OPENWEATHER_API_KEY}&units={units}"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, timeout=30.0)
+        data = response.json()
+
+    temp_unit = "°C" if units == "metric" else "°F"
+
+    return f"""Weather in {data['name']}, {data['sys']['country']}:
+Temperature: {data['main']['temp']}{temp_unit}
+Feels like: {data['main']['feels_like']}{temp_unit}
+Conditions: {data['weather'][0]['description'].capitalize()}
+Humidity: {data['main']['humidity']}%
+Wind Speed: {data['wind']['speed']} m/s"""
+
+if __name__ == "__main__":
+    mcp.run()</pre>
+                </div>
+
+                <h3>News Server (server/news_server.py)</h3>
+                <div class="modal-code">
+                    <pre>"""News MCP Server - NewsAPI Integration"""
+import os
+import httpx
+from mcp.server.fastmcp import FastMCP
+from dotenv import load_dotenv
+
+load_dotenv()
+mcp = FastMCP(name="news")
+
+NEWS_API_KEY = os.getenv("NEWS_API_KEY", "")
+NEWS_API_BASE_URL = "https://newsapi.org/v2"
+
+@mcp.tool()
+async def get_headlines(category: str = "general", country: str = "us") -> str:
+    """Get top news headlines by category.
+
+    Args:
+        category: "business", "technology", "sports", etc.
+        country: Two-letter country code (e.g., "us", "gb")
+    """
+    url = f"{NEWS_API_BASE_URL}/top-headlines?apiKey={NEWS_API_KEY}&country={country}&category={category}&pageSize=10"
+
+    async with httpx.AsyncClient() as client:
+        response = await client.get(url, timeout=30.0)
+        data = response.json()
+
+    articles = data.get('articles', [])
+    headlines = [f"Top {category.capitalize()} Headlines ({country.upper()}):\n"]
+
+    for i, article in enumerate(articles[:10], 1):
+        title = article.get('title', 'No title')
+        source = article.get('source', {}).get('name', 'Unknown')
+        headlines.append(f"{i}. {title}\n   Source: {source}")
+
+    return "\n\n".join(headlines)
+
+if __name__ == "__main__":
+    mcp.run()</pre>
+                </div>
+
+                <div class="modal-section">
+                    <h4>🎯 Zero Boilerplate!</h4>
+                    <p>FastMCP automatically handles:</p>
+                    <ul style="line-height: 2;">
+                        <li>Tool discovery API endpoints</li>
+                        <li>JSON schema generation from type hints</li>
+                        <li>Input validation</li>
+                        <li>MCP protocol handshakes</li>
+                        <li>Error handling and logging</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Client Modal -->
+    <div id="client-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Part 3: Build Intelligent Client</h2>
+                <button class="modal-close" onclick="closeModal('client-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    The MCP client connects to servers, discovers tools, and uses an LLM to intelligently select and invoke them.
+                </p>
+
+                <h3>Complete Client Implementation</h3>
+                <div class="modal-code">
+                    <pre>"""MCP Client - LLM-powered tool orchestration"""
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+from anthropic import Anthropic
+
+class MCPClient:
+    def __init__(self):
+        self.tools = []
+        self.session = None
+        self.llm = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
+    async def connect_to_server(self, server_script: str):
+        """Connect to MCP server and discover tools."""
+        server = StdioServerParameters(
+            command="python",
+            args=[server_script]
+        )
+
+        stdio = stdio_client(server)
+        read_stream, write_stream = await stdio.__aenter__()
+
+        self.session = ClientSession(read_stream, write_stream)
+        await self.session.__aenter__()
+        await self.session.initialize()
+
+        # Discover tools
+        tools_result = await self.session.list_tools()
+        self.tools = [
+            {
+                "name": tool.name,
+                "description": tool.description,
+                "inputSchema": tool.inputSchema
+            }
+            for tool in tools_result.tools
+        ]
+
+    async def chat(self, user_message: str) -> str:
+        """Process message using LLM and tools."""
+        response = self.llm.messages.create(
+            model="claude-3-5-sonnet-20241022",
+            messages=[{"role": "user", "content": user_message}],
+            tools=self.tools
+        )
+
+        # LLM decides which tool to call
+        if response.stop_reason == "tool_use":
+            for tool_use in response.content:
+                if tool_use.type == "tool_use":
+                    # Invoke tool via MCP
+                    result = await self.session.call_tool(
+                        tool_use.name,
+                        tool_use.input
+                    )
+                    # Process result and return final answer
+
+        return response.content[0].text</pre>
+                </div>
+
+                <div class="modal-section">
+                    <h4>How It Works</h4>
+                    <ol style="line-height: 2;">
+                        <li><strong>Discovery:</strong> Client connects and asks "What tools do you have?"</li>
+                        <li><strong>User Query:</strong> "What's the weather in London?"</li>
+                        <li><strong>LLM Decision:</strong> Claude sees tools and decides to call get_current_weather</li>
+                        <li><strong>Execution:</strong> Client invokes the tool via MCP</li>
+                        <li><strong>Response:</strong> LLM formats: "It's 15°C and cloudy in London"</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testing Modal -->
+    <div id="testing-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Part 4: Testing & Validation</h2>
+                <button class="modal-close" onclick="closeModal('testing-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Automated tests to verify your MCP servers work correctly.
+                </p>
+
+                <h3>Run All Tests</h3>
+                <div class="modal-code">
+                    <pre># Run the automated test suite
+uv run python examples/test_demo.py
+
+# Expected Output:
+======================================================================
+TEST SUMMARY
+======================================================================
+[PASS] Weather Server - 2 tools discovered
+  ✓ get_current_weather
+  ✓ get_forecast
+
+[PASS] News Server - 2 tools discovered
+  ✓ get_headlines
+  ✓ search_news
+
+[PASS] Finance Server - 3 tools discovered
+  ✓ get_exchange_rates
+  ✓ convert_currency
+  ✓ get_supported_currencies
+
+Total: 3/3 tests passed
+======================================================================</pre>
+                </div>
+
+                <h3>Interactive Testing</h3>
+                <div class="modal-code">
+                    <pre># Run the interactive client
+uv run python examples/interactive_client.py
+
+# Try these queries:
+> What's the weather in Tokyo?
+> Show me technology news
+> Convert 100 USD to EUR</pre>
+                </div>
+
+                <div class="modal-section">
+                    <h4>What We're Testing</h4>
+                    <ul style="line-height: 2;">
+                        <li>Server connection and initialization</li>
+                        <li>Tool discovery (can client see all tools?)</li>
+                        <li>Tool invocation (do tools execute correctly?)</li>
+                        <li>Error handling (graceful failures)</li>
+                        <li>LLM integration (does it select the right tool?)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Extending Modal -->
+    <div id="extending-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Part 5: Extending & Customizing</h2>
+                <button class="modal-close" onclick="closeModal('extending-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Add your own custom tools and extend the MCP ecosystem for your specific needs.
+                </p>
+
+                <h3>Creating a Custom Tool</h3>
+                <div class="modal-code">
+                    <pre>"""Custom Database MCP Server"""
+from mcp.server.fastmcp import FastMCP
+import sqlite3
+
+mcp = FastMCP(name="database")
+
+@mcp.tool()
+async def query_users(email: str) -> str:
+    """Find user by email in database.
+
+    Args:
+        email: User's email address
+    """
+    conn = sqlite3.connect('users.db')
+    cursor = conn.execute(
+        "SELECT name, email, created FROM users WHERE email=?",
+        (email,)
+    )
+    result = cursor.fetchone()
+    conn.close()
+
+    if result:
+        return f"User: {result[0]}\nEmail: {result[1]}\nJoined: {result[2]}"
+    return "User not found"
+
+if __name__ == "__main__":
+    mcp.run()</pre>
+                </div>
+
+                <div class="modal-section">
+                    <h4>Ideas for Custom Tools</h4>
+                    <ul style="line-height: 2;">
+                        <li>🗄️ Database queries (SQL, MongoDB, Redis)</li>
+                        <li>📝 Documentation search (internal wikis)</li>
+                        <li>🚀 Deployment triggers (CI/CD pipelines)</li>
+                        <li>💬 Team notifications (Slack, Teams)</li>
+                        <li>📊 Analytics dashboards (fetch metrics)</li>
+                        <li>🔐 Authentication systems (user management)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monitoring Modal -->
+    <div id="monitoring-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Part 6: Monitoring & Observability</h2>
+                <button class="modal-close" onclick="closeModal('monitoring-modal')">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem;">
+                    Use LangSmith to trace tool calls, monitor performance, and track costs in production.
+                </p>
+
+                <h3>Setup LangSmith</h3>
+                <div class="modal-code">
+                    <pre># Install LangSmith SDK
+uv add langsmith langchain
+
+# Add to .env
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your_langsmith_key
+LANGCHAIN_PROJECT=mcp-servers</pre>
+                </div>
+
+                <h3>Enable Tracing</h3>
+                <div class="modal-code">
+                    <pre>"""Add tracing to your client"""
+from langsmith import Client
+
+client = Client()
+
+# Wrap your tool calls
+@traceable
+async def invoke_tool(tool_name, args):
+    result = await self.session.call_tool(tool_name, args)
+    return result</pre>
+                </div>
+
+                <div class="modal-section">
+                    <h4>What You'll Monitor</h4>
+                    <ul style="line-height: 2;">
+                        <li>📊 Tool invocation frequency</li>
+                        <li>⏱️ Response times and latency</li>
+                        <li>💰 LLM token usage and costs</li>
+                        <li>❌ Error rates and failure patterns</li>
+                        <li>🎯 LLM tool selection accuracy</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // SCROLL PROGRESS BAR
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const scrollProgress = document.getElementById('scroll-progress');
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollPercentage = (scrollTop / (documentHeight - windowHeight));
+
+            scrollProgress.style.transform = `scaleX(${scrollPercentage})`;
+        });
+
+        // ========================================
+        // NAVIGATION SCROLL EFFECT
+        // ========================================
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // ========================================
+        // ACTIVE SECTION HIGHLIGHTING
+        // ========================================
+        const sections = document.querySelectorAll('.content-section, .hero');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // ========================================
+        // SCROLL REVEAL ANIMATIONS
+        // ========================================
+        const revealElements = document.querySelectorAll('.reveal');
+
+        const revealOnScroll = () => {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // ========================================
+        // HERO PARTICLES ANIMATION
+        // ========================================
+        const particlesContainer = document.getElementById('heroParticles');
+        const particleCount = 50;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+
+            // Random properties
+            const size = Math.random() * 4 + 2;
+            const duration = Math.random() * 10 + 15;
+            const startX = Math.random() * 100;
+            const drift = (Math.random() - 0.5) * 100;
+            const delay = Math.random() * 5;
+
+            particle.style.cssText = `
+                width: ${size}px;
+                height: ${size}px;
+                left: ${startX}%;
+                --duration: ${duration}s;
+                --drift: ${drift}px;
+                animation-delay: ${delay}s;
+            `;
+
+            particlesContainer.appendChild(particle);
+        }
+
+        // ========================================
+        // ACCORDION FUNCTIONALITY
+        // ========================================
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.accordion-header')) {
+                const accordionItem = e.target.closest('.accordion-item');
+                const wasActive = accordionItem.classList.contains('active');
+
+                // Close all accordions
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+
+                // Open clicked accordion if it wasn't active
+                if (!wasActive) {
+                    accordionItem.classList.add('active');
+                }
+            }
+        });
+
+        // ========================================
+        // CODE COPY FUNCTIONALITY
+        // ========================================
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('code-copy-btn')) {
+                const codeBlock = e.target.closest('.code-container').querySelector('.code-block');
+                const code = codeBlock.textContent;
+
+                navigator.clipboard.writeText(code).then(() => {
+                    e.target.textContent = '✓ Copied!';
+                    setTimeout(() => {
+                        e.target.textContent = 'Copy Code';
+                    }, 2000);
+                });
+            }
+        });
+
+        // ========================================
+        // SMOOTH SCROLL FOR ANCHOR LINKS
+        // ========================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // ========================================
+        // MOBILE MENU TOGGLE
+        // ========================================
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        navToggle.addEventListener('click', () => {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // ========================================
+        // MODAL SYSTEM
+        // ========================================
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        }
+
+        // Handle clicks on clickable cards
+        document.querySelectorAll('.clickable-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const modalId = card.getAttribute('data-modal');
+                if (modalId) {
+                    openModal(modalId);
+                }
+            });
+        });
+
+        // Close modal when clicking outside content
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+
+        // Close modal on ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    closeModal(modal.id);
+                });
+            }
+        });
+
+        // ========================================
+        // INITIALIZE
+        // ========================================
+        console.log('%c🚀 MCP Interactive Journey Loaded!', 'font-size: 20px; color: #667eea; font-weight: bold;');
+        console.log('%c📖 Explore the complete guide to building agentic AI with MCP', 'font-size: 14px; color: #64748b;');
+        console.log('%c✨ Click any card to explore detailed content and code examples!', 'font-size: 14px; color: #f093fb;');
+    </script>
+</body>
+</html>
